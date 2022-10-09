@@ -28,15 +28,15 @@ public class public_properties_checks
     }
 
     [Theory]
-    [InlineData(ComponentInspectorCertificationLevel.Basic)]
-    [InlineData(ComponentInspectorCertificationLevel.Master)]
-    public async Task given_component_inspector_certified_then_CertificationLevel_set(ComponentInspectorCertificationLevel expectedLevel)
+    [InlineData(ComponentClass.Special)]
+    [InlineData(ComponentClass.Hazardous)]
+    public async Task given_component_inspector_certified_then_AllowedComponentClass_set(ComponentClass componentClass)
     {
         await _test
             .Given(
                 new ComponentInspectorHired(_componentInspectorId),
-                new ComponentInspectorCertified(expectedLevel))
-            .ThenAggregate<ComponentInspector>(inspector => inspector.CertificationLevel == expectedLevel)
+                new ComponentInspectorCertified(_componentInspectorId, componentClass))
+            .ThenAggregate<ComponentInspector>(inspector => inspector.AllowedComponentClass == componentClass)
             .TestAsync();
     }
 }

@@ -12,14 +12,14 @@ public class ComponentInspector : IEventForged
     public Events Events { get; }
 
     public ComponentInspectorId Id { get; private set; }
-    public ComponentInspectorCertificationLevel CertificationLevel { get; private set; }
+    public ComponentClass AllowedComponentClass { get; private set; }
 
-    public static ComponentInspector Hire(ComponentInspectorId id, ComponentInspectorCertificationLevel certificationLevel)
+    public static ComponentInspector Hire(ComponentInspectorId id)
     {
         var inspector = new ComponentInspector();
         var componentEvents = inspector.Events;
         componentEvents.Apply(new ComponentInspectorHired(id.Value));
-        componentEvents.Apply(new ComponentInspectorCertified(certificationLevel));
+        componentEvents.Apply(new ComponentInspectorCertified(id.Value, ComponentClass.Standard));
         return inspector;
     }
 
@@ -30,6 +30,6 @@ public class ComponentInspector : IEventForged
 
     private void Apply(ComponentInspectorCertified e)
     {
-        CertificationLevel = e.Level;
+        AllowedComponentClass = e.ComponentClass;
     }
 }

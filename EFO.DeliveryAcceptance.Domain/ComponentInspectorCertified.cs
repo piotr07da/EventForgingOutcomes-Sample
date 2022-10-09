@@ -1,3 +1,3 @@
 ﻿namespace EFO.DeliveryAcceptance.Domain;
 
-public record ComponentInspectorCertified(ComponentInspectorCertificationLevel Level);
+public record ComponentInspectorCertified(Guid Id, ComponentClass ComponentClass);

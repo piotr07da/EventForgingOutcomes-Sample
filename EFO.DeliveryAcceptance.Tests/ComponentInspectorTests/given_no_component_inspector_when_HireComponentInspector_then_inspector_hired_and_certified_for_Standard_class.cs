@@ -8,21 +8,19 @@ using Xunit;
 
 namespace EFO.DeliveryAcceptance.Tests.ComponentInspectorTests;
 
-public class given_no_component_inspector_when_HireComponentInspector_then_inspector_hired_and_certified
+public class given_no_component_inspector_when_HireComponentInspector_then_inspector_hired_and_certified_for_Standard_class
 {
-    [Theory]
-    [InlineData(ComponentInspectorCertificationLevel.Advanced)]
-    [InlineData(ComponentInspectorCertificationLevel.Master)]
-    public async Task check(ComponentInspectorCertificationLevel certificationLevel)
+    [Fact]
+    public async Task check()
     {
         var inspectorId = Guid.NewGuid();
 
         await Test.For(inspectorId)
             .Given()
-            .When(new HireComponentInspector(inspectorId, certificationLevel))
+            .When(new HireComponentInspector(inspectorId))
             .ThenInOrder(
                 new ComponentInspectorHired(inspectorId),
-                new ComponentInspectorCertified(certificationLevel))
+                new ComponentInspectorCertified(inspectorId, ComponentClass.Standard))
             .TestAsync();
     }
 }

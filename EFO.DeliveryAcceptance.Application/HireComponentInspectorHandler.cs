@@ -17,7 +17,7 @@ public class HireComponentInspectorHandler : IConsumer<HireComponentInspector>
     {
         var command = context.Message;
 
-        var inspector = ComponentInspector.Hire(ComponentInspectorId.FromValue(command.InspectorId), command.CertificationLevel);
+        var inspector = ComponentInspector.Hire(ComponentInspectorId.FromValue(command.InspectorId));
 
         await _repository.SaveAsync(command.InspectorId, inspector, ExpectedVersion.None, context);
     }

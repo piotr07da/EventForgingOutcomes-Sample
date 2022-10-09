@@ -7,9 +7,9 @@ public class FakeEventDatabase : IEventDatabase
     private static readonly AsyncLocal<Dictionary<string, IEnumerable<object>>> _alreadySavedEvents = new();
     private static readonly AsyncLocal<Dictionary<string, IEnumerable<object>>> _newlySavedEvents = new();
 
-    public Dictionary<string, IEnumerable<object>> AlreadySavedEvents => _alreadySavedEvents.Value ?? (_alreadySavedEvents.Value = new Dictionary<string, IEnumerable<object>>());
+    public Dictionary<string, IEnumerable<object>> AlreadySavedEvents => _alreadySavedEvents.Value ??= new Dictionary<string, IEnumerable<object>>();
 
-    public Dictionary<string, IEnumerable<object>> NewlySavedEvents => _newlySavedEvents.Value ?? (_newlySavedEvents.Value = new Dictionary<string, IEnumerable<object>>());
+    public Dictionary<string, IEnumerable<object>> NewlySavedEvents => _newlySavedEvents.Value ??= new Dictionary<string, IEnumerable<object>>();
 
     public Task<IEnumerable<object>> ReadAsync<TAggregate>(string aggregateId, CancellationToken cancellationToken = new())
     {

@@ -4,6 +4,9 @@ namespace EFO.DeliveryAcceptance.Domain;
 
 public class Component : IEventForged
 {
+    private bool _measured;
+    private bool _weighed;
+
     public Component()
     {
         Events = Events.CreateFor(this);
@@ -11,56 +14,55 @@ public class Component : IEventForged
 
     public Events Events { get; }
 
+    public ComponentId Id { get; private set; }
+    public ComponentClass Class { get; private set; }
+
     public static Component RegisterArrival(ComponentId id, ComponentName name)
     {
         var component = new Component();
         var componentEvents = component.Events;
         componentEvents.Apply(new ComponentArrived(id.Value));
-        componentEvents.Apply(new ComponentNamed(name.Value));
+        componentEvents.Apply(new ComponentNamed(id.Value, name.Value));
         return component;
     }
 
-    public void CompleteInspection()
+    public void CompleteInspection(ComponentInspector componentInspector)
     {
-        if (true)
+        var errors = new List<string>();
+
+        if (componentInspector.AllowedComponentClass < Class)
         {
-            Events.Apply(new object());
+            errors.Add(DomainErrors.ComponentInspectorDoesNotHaveRequiredCertification);
         }
+
+        if (!_measured)
+        {
+            errors.Add(DomainErrors.ComponentNotMeasured);
+        }
+
+        if (!_weighed)
+        {
+            errors.Add(DomainErrors.ComponentNotWeighed);
+        }
+
+        DomainException.ThrowIfErrors(errors);
+
+        Events.Apply(new ComponentInspectionCompleted(Id.Value));
     }
-}
 
-public class ArrivalInspectorCertified
-{
-}
-
-public class ComponentClassified
-{
-    public ComponentClassified(string name)
+    private void Apply(ComponentArrived e)
     {
-        Name = name;
+        Id = ComponentId.Restore(e.Id);
     }
 
-    public string Name { get; }
-}
-
-public class ComponentNamed
-{
-    public ComponentNamed(string name)
+    private void Apply(ComponentNamed e)
     {
-        Name = name;
     }
 
-    public string Name { get; }
-}
-
-public class ComponentArrived
-{
-    public ComponentArrived(Guid id)
+    private void Apply(ComponentClassified e)
     {
-        Id = id;
+        Class = e.Class;
     }
-
-    public Guid Id { get; }
 }
 
 public struct ComponentId
@@ -71,6 +73,8 @@ public struct ComponentId
     {
         Value = value;
     }
+
+    public static ComponentId Restore(Guid value) => new(value);
 }
 
 public struct ComponentName
@@ -81,4 +85,6 @@ public struct ComponentName
     {
         Value = value;
     }
+
+    public static ComponentName Restore(string value) => new(value);
 }
