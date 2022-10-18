@@ -6,7 +6,7 @@ using EFO.DeliveryAcceptance.Tests._TestingInfrastructure;
 using EventOutcomes;
 using Xunit;
 
-namespace EFO.DeliveryAcceptance.Tests.ComponentTests.cases_for_component_inspection;
+namespace EFO.DeliveryAcceptance.Tests.ComponentTests.cases_for_completing_component_inspection;
 
 public class given_component_and_component_inspector
 {
@@ -18,7 +18,7 @@ public class given_component_and_component_inspector
     {
         _componentId = Guid.NewGuid();
         _inspectorId = Guid.NewGuid();
-        _test = new Test()
+        _test = Test.ForMany()
             .Given(_componentId,
                 new ComponentArrived(_componentId),
                 new ComponentClassified(_componentId, ComponentClass.Standard))
@@ -35,7 +35,7 @@ public class given_component_and_component_inspector
                 new ComponentMeasured(_componentId, 10.5, 2, 30),
                 new ComponentWeighed(_componentId, 1194))
             .When(new CompleteComponentInspection(_componentId, _inspectorId))
-            .ThenException<DomainException>(de => de.Errors.Contains(DomainErrors.ComponentNotWeighed))
+            .Then(_componentId, new ComponentInspectionCompleted(_componentId))
             .TestAsync();
     }
 

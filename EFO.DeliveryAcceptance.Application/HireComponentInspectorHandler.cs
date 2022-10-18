@@ -6,11 +6,11 @@ namespace EFO.DeliveryAcceptance.Application;
 
 public class HireComponentInspectorHandler : IConsumer<HireComponentInspector>
 {
-    private readonly IRepository<ComponentInspector> _repository;
+    private readonly IRepository<ComponentInspector> _componentInspectorRepository;
 
-    public HireComponentInspectorHandler(IRepository<ComponentInspector> repository)
+    public HireComponentInspectorHandler(IRepository<ComponentInspector> componentInspectorRepository)
     {
-        _repository = repository;
+        _componentInspectorRepository = componentInspectorRepository ?? throw new ArgumentNullException(nameof(componentInspectorRepository));
     }
 
     public async Task Consume(ConsumeContext<HireComponentInspector> context)
@@ -19,6 +19,6 @@ public class HireComponentInspectorHandler : IConsumer<HireComponentInspector>
 
         var inspector = ComponentInspector.Hire(ComponentInspectorId.FromValue(command.InspectorId));
 
-        await _repository.SaveAsync(command.InspectorId, inspector, ExpectedVersion.None, context);
+        await _componentInspectorRepository.SaveAsync(command.InspectorId, inspector, ExpectedVersion.None, context);
     }
 }

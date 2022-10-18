@@ -6,13 +6,16 @@ public class Component : IEventForged
 {
     private bool _measured;
     private bool _weighed;
+    private bool _inspectionCompleted;
 
     public Component()
     {
         Events = Events.CreateFor(this);
+        Errors = new List<string>();
     }
 
     public Events Events { get; }
+    public IList<string> Errors { get; }
 
     public ComponentId Id { get; private set; }
     public ComponentClass Class { get; private set; }
@@ -26,28 +29,40 @@ public class Component : IEventForged
         return component;
     }
 
+    public void Measure(ComponentInspector componentInspector, Length width, Length height, Length depth)
+    {
+        EnsureComponentInspectorIsCertified(componentInspector);
+        Errors.AddIf(DomainErrors.ComponentInspectionAlreadyCompleted, _inspectionCompleted);
+
+        DomainException.ThrowIfErrors(Errors);
+
+        Events.Apply(new ComponentMeasured(Id.Value, width.Value, height.Value, depth.Value));
+    }
+
+    public void Weigh(ComponentInspector componentInspector, Weight weight)
+    {
+        EnsureComponentInspectorIsCertified(componentInspector);
+        Errors.AddIf(DomainErrors.ComponentInspectionAlreadyCompleted, _inspectionCompleted);
+
+        DomainException.ThrowIfErrors(Errors);
+
+        Events.Apply(new ComponentWeighed(Id.Value, weight.Value));
+    }
+
     public void CompleteInspection(ComponentInspector componentInspector)
     {
-        var errors = new List<string>();
+        EnsureComponentInspectorIsCertified(componentInspector);
+        Errors.AddIf(DomainErrors.ComponentNotMeasured, !_measured);
+        Errors.AddIf(DomainErrors.ComponentNotWeighed, !_weighed);
 
-        if (componentInspector.AllowedComponentClass < Class)
-        {
-            errors.Add(DomainErrors.ComponentInspectorDoesNotHaveRequiredCertification);
-        }
-
-        if (!_measured)
-        {
-            errors.Add(DomainErrors.ComponentNotMeasured);
-        }
-
-        if (!_weighed)
-        {
-            errors.Add(DomainErrors.ComponentNotWeighed);
-        }
-
-        DomainException.ThrowIfErrors(errors);
+        DomainException.ThrowIfErrors(Errors);
 
         Events.Apply(new ComponentInspectionCompleted(Id.Value));
+    }
+
+    private void EnsureComponentInspectorIsCertified(ComponentInspector componentInspector)
+    {
+        Errors.AddIf(DomainErrors.ComponentInspectorDoesNotHaveRequiredCertification, componentInspector.AllowedComponentClass < Class);
     }
 
     private void Apply(ComponentArrived e)
@@ -62,6 +77,21 @@ public class Component : IEventForged
     private void Apply(ComponentClassified e)
     {
         Class = e.Class;
+    }
+
+    private void Apply(ComponentMeasured e)
+    {
+        _measured = true;
+    }
+
+    private void Apply(ComponentWeighed e)
+    {
+        _weighed = true;
+    }
+
+    private void Apply(ComponentInspectionCompleted e)
+    {
+        _inspectionCompleted = true;
     }
 }
 
