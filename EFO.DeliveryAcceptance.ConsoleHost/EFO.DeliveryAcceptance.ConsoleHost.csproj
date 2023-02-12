@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EventForging" Version="1.0.2-alpha" />
+    <PackageReference Include="EventForging.InMemory" Version="1.0.2-alpha" />
+  </ItemGroup>
+
+</Project>

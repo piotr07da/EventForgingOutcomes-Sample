@@ -94,27 +94,3 @@ public class Component : IEventForged
         _inspectionCompleted = true;
     }
 }
-
-public struct ComponentId
-{
-    public Guid Value { get; }
-
-    private ComponentId(Guid value)
-    {
-        Value = value;
-    }
-
-    public static ComponentId Restore(Guid value) => new(value);
-}
-
-public struct ComponentName
-{
-    public string Value { get; }
-
-    private ComponentName(string value)
-    {
-        Value = value;
-    }
-
-    public static ComponentName Restore(string value) => new(value);
-}
