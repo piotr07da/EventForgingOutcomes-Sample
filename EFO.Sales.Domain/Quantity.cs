@@ -14,6 +14,12 @@ public readonly struct Quantity
     public override int GetHashCode() => EqualityHelper.GetHashCode(Value);
     public static bool operator ==(Quantity lhs, Quantity rhs) => EqualityHelper.Equals(lhs, rhs, x => new object[] { x.Value, });
     public static bool operator !=(Quantity lhs, Quantity rhs) => !(lhs == rhs);
+    public static bool operator <=(Quantity lhs, Quantity rhs) => lhs.Value <= rhs.Value;
+    public static bool operator >=(Quantity lhs, Quantity rhs) => lhs.Value >= rhs.Value;
+    public static bool operator <(Quantity lhs, Quantity rhs) => lhs.Value < rhs.Value;
+    public static bool operator >(Quantity lhs, Quantity rhs) => lhs.Value > rhs.Value;
+    public static Quantity operator +(Quantity lhs, Quantity rhs) => FromValue(lhs.Value + rhs.Value);
+    public static Quantity operator -(Quantity lhs, Quantity rhs) => FromValue(lhs.Value - rhs.Value);
 
     public static implicit operator Quantity(int value) => FromValue(value);
     public static implicit operator int(Quantity value) => value.Value;

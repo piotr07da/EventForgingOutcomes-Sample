@@ -14,13 +14,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{85A1385D-E80A-491A-AC9C-C9F6BA89E478}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
+		.github\workflows\build-n-test.yml = .github\workflows\build-n-test.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Sales.Domain", "EFO.Sales.Domain\EFO.Sales.Domain.csproj", "{D2426A16-8995-42DB-A793-91A5C803451A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.Sales.Domain", "EFO.Sales.Domain\EFO.Sales.Domain.csproj", "{D2426A16-8995-42DB-A793-91A5C803451A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Sales.Tests", "EFO.Sales.Tests\EFO.Sales.Tests.csproj", "{1A3029EA-5145-4077-94AA-9C4A687EB91E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.Sales.Tests", "EFO.Sales.Tests\EFO.Sales.Tests.csproj", "{1A3029EA-5145-4077-94AA-9C4A687EB91E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Sales.Application", "EFO.Sales.Application\EFO.Sales.Application.csproj", "{E2D9CE72-CEC6-4114-A79D-F1F235831A09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.Sales.Application", "EFO.Sales.Application\EFO.Sales.Application.csproj", "{E2D9CE72-CEC6-4114-A79D-F1F235831A09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

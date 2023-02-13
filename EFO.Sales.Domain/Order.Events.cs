@@ -10,7 +10,7 @@ public sealed record OrderDiscountCanceled(Guid OrderId, Guid DiscountApplicatio
 
 public sealed record OrderPriced(Guid OrderId, decimal Price);
 
-public sealed record OrderItemAdded(Guid OrderId, Guid OrderItemId, Guid ProductId, int Quantity);
+public sealed record OrderItemAdded(Guid OrderId, Guid OrderItemId, Guid ProductId);
 
 public sealed record OrderItemRemoved(Guid OrderId, Guid OrderItemId);
 
