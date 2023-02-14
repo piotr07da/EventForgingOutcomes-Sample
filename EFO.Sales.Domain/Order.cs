@@ -28,11 +28,8 @@ public class Order : IEventForged
     public void AddItem(OrderItemId itemId, Product product, Quantity quantity)
     {
         OrderItem.Add(this, itemId, product, quantity);
-        var orderPrice = Money.Zero;
-        foreach (var item in Items)
-        {
-            orderPrice += item.Price;
-        }
+
+        var orderPrice = Items.SumUpPrices();
 
         Events.Apply(new OrderPriced(Id, orderPrice));
     }
