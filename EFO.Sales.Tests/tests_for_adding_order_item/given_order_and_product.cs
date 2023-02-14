@@ -107,7 +107,7 @@ public class given_order_and_product
             .ThenInOrder(_orderId,
                 new OrderItemPriced(_orderId, _orderItemId, expectedItemPrice),
                 new OrderPriced(_orderId, expectedItemPrice))
-            .ThenAny(_orderId);
+            .ThenAny(_productId);
 
         await _test.TestAsync();
     }

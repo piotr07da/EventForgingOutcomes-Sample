@@ -1,4 +1,5 @@
-﻿using EventForging;
+﻿using System.Runtime.CompilerServices;
+using EventForging;
 
 namespace EFO.Sales.Tests._TestingInfrastructure;
 
@@ -11,13 +12,15 @@ public class FakeEventDatabase : IEventDatabase
 
     public Dictionary<string, IEnumerable<object>> NewlySavedEvents => _newlySavedEvents.Value ?? throw new NullReferenceException("Not initialized.");
 
-    public Task ReadAsync<TAggregate>(string aggregateId, IEventDatabaseReadCallback callback, CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<object> ReadAsync<TAggregate>(string aggregateId, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
-        callback.OnBegin();
         var events = AlreadySavedEvents.TryGetValue(aggregateId, out var asEvents) ? asEvents.ToArray() : Array.Empty<object>();
-        callback.OnRead(events);
-        callback.OnEnd();
-        return Task.CompletedTask;
+        foreach (var e in events)
+        {
+            yield return e;
+        }
+
+        await Task.CompletedTask;
     }
 
     public Task WriteAsync<TAggregate>(string aggregateId, IReadOnlyList<object> events, AggregateVersion lastReadAggregateVersion, ExpectedVersion expectedVersion, Guid conversationId, Guid initiatorId, IDictionary<string, string> customProperties, CancellationToken cancellationToken = default)
