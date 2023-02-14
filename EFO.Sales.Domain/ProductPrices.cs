@@ -17,7 +17,9 @@ public class ProductPrices
             }
         }
 
-        throw new DomainException(DomainErrors.QuantityToLowForPricing);
+        throw new DomainException(new DomainError(DomainErrors.QuantityToLowForPricing)
+            .WithData("Quantity", quantity)
+            .WithData("MinimalQuantity", PricesForQuantityThreshold[0].Threshold));
     }
 
     // --------------------------------------------------- APPLY EVENTS ---------------------------------------------------

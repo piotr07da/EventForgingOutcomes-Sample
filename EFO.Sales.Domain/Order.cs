@@ -14,6 +14,7 @@ public class Order : IEventForged
     public IList<string> Errors { get; }
 
     public OrderId Id { get; private set; }
+    public OrderItems Items { get; } = new();
 
     public static Order Start(OrderId orderId, CustomerId customerId)
     {
@@ -26,12 +27,14 @@ public class Order : IEventForged
 
     public void AddItem(OrderItemId itemId, Product product, Quantity quantity)
     {
-        Events.Apply(new OrderItemAdded(Id, itemId, product.Id));
-        Events.Apply(new OrderItemQuantityChanged(Id, itemId, quantity));
+        OrderItem.Add(this, itemId, product, quantity);
+        var orderPrice = Money.Zero;
+        foreach (var item in Items)
+        {
+            orderPrice += item.Price;
+        }
 
-        var itemPrice = product.Prices.GetUnitPriceForQuantity(quantity) * quantity;
-        Events.Apply(new OrderItemPriced(Id, itemId, itemPrice));
-        Events.Apply(new OrderPriced(Id, itemPrice));
+        Events.Apply(new OrderPriced(Id, orderPrice));
     }
 
     // --------------------------------------------------- APPLY EVENTS ---------------------------------------------------
@@ -45,19 +48,15 @@ public class Order : IEventForged
     {
     }
 
-    private void Apply(OrderItemAdded e)
-    {
-    }
-
-    private void Apply(OrderItemQuantityChanged e)
-    {
-    }
-
-    private void Apply(OrderItemPriced e)
-    {
-    }
-
     private void Apply(OrderPriced e)
     {
     }
+
+    private void Apply(OrderItemAdded e) => OrderItem.Apply(this, e);
+
+    private void Apply(OrderItemQuantityChanged e) => Item(e.OrderItemId).Apply(e);
+
+    private void Apply(OrderItemPriced e) => Item(e.OrderItemId).Apply(e);
+
+    private OrderItem Item(OrderItemId itemId) => Items.Find(itemId);
 }

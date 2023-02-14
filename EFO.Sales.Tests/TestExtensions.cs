@@ -7,6 +7,6 @@ internal static class TestExtensions
 {
     public static Test ThenDomainExceptionWith(this Test test, string domainError)
     {
-        return test.ThenAnyException<DomainException>(de => de.Errors.Contains(domainError));
+        return test.ThenAnyException<DomainException>(de => de.Errors.Any(de => de.Name == domainError));
     }
 }

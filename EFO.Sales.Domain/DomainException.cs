@@ -2,19 +2,19 @@
 
 public class DomainException : Exception
 {
-    public DomainException(params string[] errors)
+    public DomainException(params DomainError[] errors)
     {
         Errors = errors;
     }
 
-    public string[] Errors { get; }
+    public DomainError[] Errors { get; }
 
-    public static void ThrowIfErrors(IEnumerable<string> errors)
+    public static void ThrowIfErrors(IEnumerable<DomainError> errors)
     {
-        var errorsArray = errors as string[] ?? errors.ToArray();
+        var errorsArray = errors as DomainError[] ?? errors.ToArray();
         if (errorsArray.Any())
         {
-            throw new DomainException(errorsArray.ToArray());
+            throw new DomainException(errorsArray);
         }
     }
 }
