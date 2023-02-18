@@ -40,7 +40,7 @@ public sealed class OrderItems : IReadOnlyList<OrderItem>
             }
         }
 
-        throw new DomainException(new DomainError(DomainErrors.OrderItemWithGivenIdNotFound).WithData("ItemId", itemId));
+        throw new DomainException(new DomainError(DomainErrors.OrderItemWithGivenIdNotFound).WithData("OrderItemId", itemId));
     }
 
     public void Add(OrderItem item)

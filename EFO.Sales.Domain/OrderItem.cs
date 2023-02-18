@@ -30,6 +30,11 @@ public sealed class OrderItem
         return order.Items.Find(id);
     }
 
+    public void Remove()
+    {
+        Events.Apply(new OrderItemRemoved(OrderId, Id));
+    }
+
     // --------------------------------------------------- APPLY EVENTS ---------------------------------------------------
 
     internal static void Apply(Order order, OrderItemAdded e)
@@ -39,6 +44,11 @@ public sealed class OrderItem
             Id = OrderItemId.Restore(e.OrderItemId),
         };
         order.Items.Add(item);
+    }
+
+    internal void Apply(OrderItemRemoved e)
+    {
+        _order.Items.Remove(this);
     }
 
     internal void Apply(OrderItemQuantityChanged e)

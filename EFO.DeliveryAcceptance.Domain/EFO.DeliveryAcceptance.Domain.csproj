@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-	<ItemGroup>
-		<PackageReference Include="EventForging" Version="1.0.0-alpha" />
-	</ItemGroup>
-
-</Project>

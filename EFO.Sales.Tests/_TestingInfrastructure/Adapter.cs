@@ -1,4 +1,5 @@
 ﻿using EFO.Sales.Application;
+using EFO.Sales.Application.MassTransit;
 using EventForging;
 using EventForging.DependencyInjection;
 using EventOutcomes;
@@ -19,7 +20,16 @@ public class Adapter : IAdapter
         {
             var asm = typeof(StartOrderConsumer).Assembly;
             c.AddConsumers(asm);
+
+            c.ConfigureMediator((registrationContext, configurator) =>
+            {
+                configurator.ConnectConsumerConfigurationObserver(new ConsumerConfigurationObserver(registrationContext));
+            });
         });
+
+        services.AddLogging();
+        services.AddLocalization(lo => lo.ResourcesPath = "");
+
         // register all other services here - your main application registration code and all other fakes used for your tests
         ServiceProvider = services.BuildServiceProvider();
 

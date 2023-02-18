@@ -34,6 +34,15 @@ public class Order : IEventForged
         Events.Apply(new OrderPriced(Id, orderPrice));
     }
 
+    public void RemoveItem(OrderItemId itemId)
+    {
+        Item(itemId).Remove();
+
+        var orderPrice = Items.SumUpPrices();
+
+        Events.Apply(new OrderPriced(Id, orderPrice));
+    }
+
     // --------------------------------------------------- APPLY EVENTS ---------------------------------------------------
 
     private void Apply(OrderStarted e)
@@ -50,6 +59,8 @@ public class Order : IEventForged
     }
 
     private void Apply(OrderItemAdded e) => OrderItem.Apply(this, e);
+
+    private void Apply(OrderItemRemoved e) => Item(e.OrderItemId).Apply(e);
 
     private void Apply(OrderItemQuantityChanged e) => Item(e.OrderItemId).Apply(e);
 
