@@ -43,6 +43,15 @@ public class Order : IEventForged
         Events.Apply(new OrderPriced(Id, orderPrice));
     }
 
+    public void ChangeItemQuantity(OrderItemId itemId, Product product, Quantity quantity)
+    {
+        Item(itemId).ChangeQuantity(product, quantity);
+
+        var orderPrice = Items.SumUpPrices();
+
+        Events.Apply(new OrderPriced(Id, orderPrice));
+    }
+
     // --------------------------------------------------- APPLY EVENTS ---------------------------------------------------
 
     private void Apply(OrderStarted e)

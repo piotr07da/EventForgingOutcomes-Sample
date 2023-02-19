@@ -38,4 +38,16 @@ public class order_public_properties_checks
             .ThenAggregate<Order>(_orderId, order => order.Items.Contains(orderItemId) && order.Items.Find(orderItemId).Id.Value == orderItemId)
             .TestAsync();
     }
+
+    [Fact]
+    public async Task given_order_item_added_and_its_quantity_changed_then_added_order_item_Quantity_is_set()
+    {
+        var orderItemId = Guid.NewGuid();
+        var orderItemProductId = Guid.NewGuid();
+
+        await _test
+            .Given(new OrderStarted(_orderId), new OrderItemAdded(_orderId, orderItemId, orderItemProductId), new OrderItemQuantityChanged(_orderId, orderItemId, 5463))
+            .ThenAggregate<Order>(_orderId, order => order.Items.Contains(orderItemId) && order.Items.Find(orderItemId).Quantity == 5463)
+            .TestAsync();
+    }
 }

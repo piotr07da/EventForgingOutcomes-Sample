@@ -14,7 +14,9 @@ public sealed class OrderItem
     private Events Events => _order.Events;
     private OrderId OrderId => _order.Id;
 
-    public OrderItemId Id { get; private set; }
+    public OrderItemId Id { get; private init; }
+    public ProductId ProductId { get; private init; }
+    public Quantity Quantity { get; private set; }
     public Money Price { get; private set; }
 
     internal static OrderItem Add(Order order, OrderItemId id, Product product, Quantity quantity)
@@ -24,15 +26,30 @@ public sealed class OrderItem
         events.Apply(new OrderItemAdded(order.Id, id, product.Id));
         events.Apply(new OrderItemQuantityChanged(order.Id, id, quantity));
 
-        var itemPrice = product.Prices.GetUnitPriceForQuantity(quantity) * quantity;
-        events.Apply(new OrderItemPriced(order.Id, id, itemPrice));
+        var orderItem = order.Items.Find(id);
 
-        return order.Items.Find(id);
+        RecalculatePrice(orderItem, product);
+
+        return orderItem;
     }
 
     public void Remove()
     {
         Events.Apply(new OrderItemRemoved(OrderId, Id));
+    }
+
+    public void ChangeQuantity(Product product, Quantity quantity)
+    {
+        Events.Apply(new OrderItemQuantityChanged(OrderId, Id, quantity));
+
+        RecalculatePrice(this, product);
+    }
+
+    private static void RecalculatePrice(OrderItem orderItem, Product product)
+    {
+        var quantity = orderItem.Quantity;
+        var itemPrice = product.Prices.GetUnitPriceForQuantity(quantity) * quantity;
+        orderItem.Events.Apply(new OrderItemPriced(orderItem.OrderId, orderItem.Id, itemPrice));
     }
 
     // --------------------------------------------------- APPLY EVENTS ---------------------------------------------------
@@ -42,6 +59,7 @@ public sealed class OrderItem
         var item = new OrderItem(order)
         {
             Id = OrderItemId.Restore(e.OrderItemId),
+            ProductId = ProductId.Restore(e.ProductId),
         };
         order.Items.Add(item);
     }
@@ -53,6 +71,7 @@ public sealed class OrderItem
 
     internal void Apply(OrderItemQuantityChanged e)
     {
+        Quantity = e.Quantity;
     }
 
     internal void Apply(OrderItemPriced e)

@@ -11,7 +11,7 @@ public class ProductPrices
         for (var i = PricesForQuantityThreshold.Length - 1; i >= 0; --i)
         {
             var priceForThreshold = PricesForQuantityThreshold[i];
-            if (quantity > priceForThreshold.Threshold)
+            if (quantity >= priceForThreshold.Threshold)
             {
                 return priceForThreshold.UnitPrice;
             }

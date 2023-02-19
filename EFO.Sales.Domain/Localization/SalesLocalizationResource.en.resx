@@ -120,4 +120,7 @@
   <data name="OrderItemWithGivenIdNotFound" xml:space="preserve">
     <value>Cannot find order item with id '{OrderItemId}'.</value>
   </data>
+  <data name="QuantityToLowForPricing" xml:space="preserve">
+    <value>Quantity {Quantity} is to low. Minimal quantity is {MinimalQuantity}.</value>
+  </data>
 </root>

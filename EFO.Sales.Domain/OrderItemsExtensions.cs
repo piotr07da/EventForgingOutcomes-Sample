@@ -1,6 +1,6 @@
 ﻿namespace EFO.Sales.Domain;
 
-public static class OrderItemsExtensions
+internal static class OrderItemsExtensions
 {
     public static Money SumUpPrices(this OrderItems items)
     {
