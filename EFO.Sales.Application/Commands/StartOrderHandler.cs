@@ -2,13 +2,13 @@
 using EventForging;
 using MassTransit;
 
-namespace EFO.Sales.Application;
+namespace EFO.Sales.Application.Commands;
 
-public sealed class StartOrderConsumer : IConsumer<StartOrder>
+public sealed class StartOrderHandler : IConsumer<StartOrder>
 {
     private readonly IRepository<Order> _orderRepository;
 
-    public StartOrderConsumer(IRepository<Order> orderRepository)
+    public StartOrderHandler(IRepository<Order> orderRepository)
     {
         _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
     }

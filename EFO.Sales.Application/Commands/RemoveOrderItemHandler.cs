@@ -2,13 +2,13 @@
 using EventForging;
 using MassTransit;
 
-namespace EFO.Sales.Application;
+namespace EFO.Sales.Application.Commands;
 
-public sealed class RemoveOrderItemConsumer : IConsumer<RemoveOrderItem>
+public sealed class RemoveOrderItemHandler : IConsumer<RemoveOrderItem>
 {
     private readonly IRepository<Order> _orderRepository;
 
-    public RemoveOrderItemConsumer(IRepository<Order> orderRepository)
+    public RemoveOrderItemHandler(IRepository<Order> orderRepository)
     {
         _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
     }

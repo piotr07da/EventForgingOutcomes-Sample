@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <PackageReference Include="EventForging.InMemory" Version="1.0.6-alpha" />
+    <PackageReference Include="EventForging.InMemory" Version="1.0.7-alpha" />
     <PackageReference Include="MassTransit" Version="8.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />

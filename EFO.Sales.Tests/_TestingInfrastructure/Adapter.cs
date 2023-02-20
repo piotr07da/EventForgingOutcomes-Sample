@@ -1,7 +1,7 @@
 ﻿using EFO.Sales.Application;
+using EFO.Sales.Application.Commands;
 using EFO.Sales.Application.MassTransit;
 using EventForging;
-using EventForging.DependencyInjection;
 using EventOutcomes;
 using MassTransit;
 using MassTransit.Mediator;
@@ -18,7 +18,7 @@ public class Adapter : IAdapter
         services.AddSingleton<IEventDatabase, FakeEventDatabase>();
         services.AddMediator(c =>
         {
-            var asm = typeof(StartOrderConsumer).Assembly;
+            var asm = typeof(StartOrderHandler).Assembly;
             c.AddConsumers(asm);
 
             c.ConfigureMediator((registrationContext, configurator) =>
@@ -29,6 +29,8 @@ public class Adapter : IAdapter
 
         services.AddLogging();
         services.AddLocalization(lo => lo.ResourcesPath = "");
+
+        services.AddSalesApplicationLayer();
 
         // register all other services here - your main application registration code and all other fakes used for your tests
         ServiceProvider = services.BuildServiceProvider();

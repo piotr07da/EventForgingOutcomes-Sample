@@ -2,14 +2,14 @@
 using EventForging;
 using MassTransit;
 
-namespace EFO.Sales.Application;
+namespace EFO.Sales.Application.Commands;
 
-public sealed class ChangeOrderItemQuantityConsumer : IConsumer<ChangeOrderItemQuantity>
+public sealed class ChangeOrderItemQuantityHandler : IConsumer<ChangeOrderItemQuantity>
 {
     private readonly IRepository<Order> _orderRepository;
     private readonly IRepository<Product> _productRepository;
 
-    public ChangeOrderItemQuantityConsumer(IRepository<Order> orderRepository, IRepository<Product> productRepository)
+    public ChangeOrderItemQuantityHandler(IRepository<Order> orderRepository, IRepository<Product> productRepository)
     {
         _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
         _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
