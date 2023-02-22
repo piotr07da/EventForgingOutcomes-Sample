@@ -1,5 +1,6 @@
 using EFO.Sales.Application.Commands;
 using EFO.Sales.Application.Queries;
+using EFO.Sales.Application.ReadModel;
 using MassTransit.Mediator;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,12 +18,15 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet("{orderId}")]
-    public async Task<OrderDto> GetOrder([FromRoute] Guid orderId)
+    public async Task<OrderDto> GetOrder([FromRoute] Guid orderId, CancellationToken cancellationToken = default)
     {
-        var query = new GetOrder(orderId);
+        var query = new GetOrder
+        {
+            OrderId = orderId,
+        };
 
         var client = _mediator.CreateRequestClient<GetOrder>();
-        var orderResponse = await client.GetResponse<OrderDto>(query);
+        var orderResponse = await client.GetResponse<OrderDto>(query, cancellationToken);
         return orderResponse.Message;
     }
 

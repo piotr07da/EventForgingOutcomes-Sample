@@ -1,11 +1,6 @@
 using EFO.Sales.Application;
-using EFO.Sales.Application.Commands;
-using EFO.Sales.Application.EventHandling;
 using EFO.Sales.Application.MassTransit;
-using EFO.Sales.Domain;
-using EventForging;
-using EventForging.InMemory;
-using EventForging.Serialization;
+using EFO.Sales.WebApi.ServiceCollectionExtensions;
 using MassTransit;
 
 namespace EFO.Sales.WebApi;
@@ -27,7 +22,7 @@ public class Program
 
         services.AddMediator(x =>
         {
-            x.AddConsumers(typeof(StartOrderHandler).Assembly);
+            x.AddSalesApplicationLayerConsumers();
 
             x.ConfigureMediator((registrationContext, configurator) =>
             {
@@ -35,19 +30,8 @@ public class Program
             });
         });
 
-        services.AddEventForging(r =>
-        {
-            r.ConfigureEventForging(c =>
-            {
-                c.Serialization.SetEventTypeNameMappers(new DefaultEventTypeNameMapper(typeof(OrderStarted).Assembly));
-            });
-            r.UseInMemory(c =>
-            {
-                c.SerializationEnabled = true;
-                c.AddEventSubscription("MainPipeline");
-            });
-            r.AddEventHandlers(typeof(EventHandlers).Assembly);
-        });
+        services.AddInMemoryEventForging();
+        services.AddInMemoryMassTransit();
 
         services.AddLogging();
         services.AddLocalization();

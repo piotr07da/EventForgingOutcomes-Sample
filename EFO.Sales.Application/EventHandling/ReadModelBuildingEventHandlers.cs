@@ -1,4 +1,4 @@
-﻿using EFO.Sales.Application.Queries;
+﻿using EFO.Sales.Application.ReadModel;
 using EFO.Sales.Domain;
 using EventForging.EventsHandling;
 
