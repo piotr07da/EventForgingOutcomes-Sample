@@ -23,6 +23,11 @@ public readonly struct OrderId
 
     public static OrderId FromValue(Guid value)
     {
+        if (value == Guid.Empty)
+        {
+            throw new DomainException(new DomainError(DomainErrors.OrderIdCannotBeEmpty));
+        }
+
         return new OrderId(value);
     }
 }

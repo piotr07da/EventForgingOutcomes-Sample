@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.Sales.Application", "EF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.Sales.WebApi", "EFO.Sales.WebApi\EFO.Sales.WebApi.csproj", "{3AE529D8-50F9-409D-A66F-7A2A272516E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Sales.WebUi", "EFO.Sales.WebUi\EFO.Sales.WebUi.csproj", "{6887E63A-C25F-428C-AEB6-4053FB2A3AAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{3AE529D8-50F9-409D-A66F-7A2A272516E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AE529D8-50F9-409D-A66F-7A2A272516E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AE529D8-50F9-409D-A66F-7A2A272516E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6887E63A-C25F-428C-AEB6-4053FB2A3AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6887E63A-C25F-428C-AEB6-4053FB2A3AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6887E63A-C25F-428C-AEB6-4053FB2A3AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6887E63A-C25F-428C-AEB6-4053FB2A3AAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

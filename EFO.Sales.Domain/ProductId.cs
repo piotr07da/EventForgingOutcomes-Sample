@@ -23,6 +23,11 @@ public readonly struct ProductId
 
     public static ProductId FromValue(Guid value)
     {
+        if (value == Guid.Empty)
+        {
+            throw new DomainException(new DomainError(DomainErrors.ProductIdCannotBeEmpty));
+        }
+
         return new ProductId(value);
     }
 }
