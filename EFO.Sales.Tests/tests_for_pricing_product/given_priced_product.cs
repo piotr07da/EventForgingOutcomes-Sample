@@ -13,32 +13,36 @@ public class given_priced_product
     private readonly Test _test;
     private readonly Guid _productId;
 
+    private readonly int _existingThresholdQuantity;
+    private readonly decimal _existingThresholdPrice;
+
     public given_priced_product()
     {
         _productId = Guid.NewGuid();
+        _existingThresholdQuantity = 50;
+        _existingThresholdPrice = 100m;
 
         _test = Test.For(_productId)
-            .Given(new ProductIntroduced(_productId))
-            .Given(new ProductPriced(_productId, 50, 100m));
+            .Given(
+                new ProductIntroduced(_productId),
+                new ProductPriced(_productId, _existingThresholdQuantity, _existingThresholdPrice));
     }
 
-    [Fact]
-    public async Task when_PriceProduct_for_the_same_threshold_with_same_price_then_product_priced()
-    {
-        _test
-            .When(new PriceProduct(_productId, 50, 200m))
-            .Then(new ProductPriced(_productId, 50, 200m));
-        await _test.TestAsync();
-    }
+    private int QuantityLowerThanExistingThreshold => _existingThresholdQuantity - 1;
+    private int QuantityHigherThanExistingThreshold => _existingThresholdQuantity + 1;
+
+    private decimal PriceLowerThanExistingThreshold => _existingThresholdPrice - 1m;
+    private decimal PriceHigherThanExistingThreshold => _existingThresholdPrice + 1m;
 
     [Theory]
     [InlineData(50)]
+    [InlineData(100)]
     [InlineData(350)]
-    public async Task when_PriceProduct_for_the_same_threshold_with_different_price_then_product_priced(decimal differentPrice)
+    public async Task when_PriceProduct_for_the_same_threshold_then_product_priced(decimal newPrice)
     {
         _test
-            .When(new PriceProduct(_productId, 50, differentPrice))
-            .Then(new ProductPriced(_productId, 50, differentPrice));
+            .When(new PriceProduct(_productId, _existingThresholdQuantity, newPrice))
+            .Then(new ProductPriced(_productId, _existingThresholdQuantity, newPrice));
         await _test.TestAsync();
     }
 
@@ -46,8 +50,8 @@ public class given_priced_product
     public async Task when_PriceProduct_for_lower_threshold_with_the_higher_price_then_product_priced()
     {
         _test
-            .When(new PriceProduct(_productId, 49, 250m))
-            .Then(new ProductPriced(_productId, 49, 250m));
+            .When(new PriceProduct(_productId, QuantityLowerThanExistingThreshold, PriceHigherThanExistingThreshold))
+            .Then(new ProductPriced(_productId, QuantityLowerThanExistingThreshold, PriceHigherThanExistingThreshold));
         await _test.TestAsync();
     }
 
@@ -57,7 +61,7 @@ public class given_priced_product
     public async Task when_PriceProduct_for_lower_threshold_with_the_same_or_lower_price_then_exception_thrown(decimal sameOrLowerPrice)
     {
         _test
-            .When(new PriceProduct(_productId, 49, sameOrLowerPrice))
+            .When(new PriceProduct(_productId, QuantityLowerThanExistingThreshold, sameOrLowerPrice))
             .ThenDomainExceptionWith(DomainErrors.PriceForLowerQuantityThresholdMustBeHigher);
         await _test.TestAsync();
     }
@@ -66,8 +70,8 @@ public class given_priced_product
     public async Task when_PriceProduct_for_higher_threshold_with_the_lower_price_then_product_priced()
     {
         _test
-            .When(new PriceProduct(_productId, 51, 50m))
-            .Then(new ProductPriced(_productId, 51, 50m));
+            .When(new PriceProduct(_productId, QuantityHigherThanExistingThreshold, PriceLowerThanExistingThreshold))
+            .Then(new ProductPriced(_productId, QuantityHigherThanExistingThreshold, PriceLowerThanExistingThreshold));
         await _test.TestAsync();
     }
 
@@ -77,7 +81,7 @@ public class given_priced_product
     public async Task when_PriceProduct_for_higher_threshold_with_the_same_or_higher_price_then_exception_thrown(decimal sameOrHigherPrice)
     {
         _test
-            .When(new PriceProduct(_productId, 51, sameOrHigherPrice))
+            .When(new PriceProduct(_productId, QuantityHigherThanExistingThreshold, sameOrHigherPrice))
             .ThenDomainExceptionWith(DomainErrors.PriceForHigherQuantityThresholdMustBeLower);
         await _test.TestAsync();
     }

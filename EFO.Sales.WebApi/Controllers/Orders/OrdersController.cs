@@ -1,10 +1,10 @@
 using EFO.Sales.Application.Commands;
 using EFO.Sales.Application.Queries;
-using EFO.Sales.Application.ReadModel;
+using EFO.Sales.Application.ReadModel.Orders;
 using MassTransit.Mediator;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EFO.Sales.WebApi.Controllers;
+namespace EFO.Sales.WebApi.Controllers.Orders;
 
 [ApiController]
 [Route("orders")]

@@ -1,6 +1,6 @@
-﻿namespace EFO.Sales.Application.ReadModel;
+﻿namespace EFO.Sales.Application.ReadModel.Orders;
 
-public class OrderDto
+public sealed class OrderDto
 {
     public OrderDto(Guid orderId)
     {

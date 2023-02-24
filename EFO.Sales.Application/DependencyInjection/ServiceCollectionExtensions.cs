@@ -1,4 +1,5 @@
-﻿using EFO.Sales.Application.ReadModel;
+﻿using EFO.Sales.Application.ReadModel.Orders;
+using EFO.Sales.Application.ReadModel.Products;
 using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
@@ -9,6 +10,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddSalesApplicationLayer(this IServiceCollection services)
     {
         services.AddSingleton<IOrdersReadModel, OrdersReadModel>();
+        services.AddSingleton<IProductsReadModel, ProductsReadModel>();
         return services;
     }
 }

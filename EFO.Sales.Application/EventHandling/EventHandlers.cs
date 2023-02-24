@@ -6,7 +6,10 @@ namespace EFO.Sales.Application.EventHandling;
 
 public sealed class EventHandlers :
     IEventHandler<OrderStarted>,
-    IEventHandler<OrderCustomerAssigned>
+    IEventHandler<OrderCustomerAssigned>,
+    IEventHandler<ProductIntroduced>,
+    IEventHandler<ProductNamed>,
+    IEventHandler<ProductPriced>
 {
     private readonly IEventDispatcher _eventDispatcher;
     private readonly ILogger _logger;
@@ -22,6 +25,12 @@ public sealed class EventHandlers :
     public async Task Handle(OrderStarted e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 
     public async Task Handle(OrderCustomerAssigned e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+
+    public async Task Handle(ProductIntroduced e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+
+    public async Task Handle(ProductNamed e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+
+    public async Task Handle(ProductPriced e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 
     private async Task DispatchAsync(object e, EventInfo ei, CancellationToken cancellationToken)
     {

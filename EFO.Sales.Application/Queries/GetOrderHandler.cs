@@ -1,4 +1,4 @@
-﻿using EFO.Sales.Application.ReadModel;
+﻿using EFO.Sales.Application.ReadModel.Orders;
 using MassTransit;
 
 namespace EFO.Sales.Application.Queries;

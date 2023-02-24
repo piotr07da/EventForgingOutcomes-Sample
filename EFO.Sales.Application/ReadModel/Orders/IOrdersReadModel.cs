@@ -1,4 +1,4 @@
-﻿namespace EFO.Sales.Application.ReadModel;
+﻿namespace EFO.Sales.Application.ReadModel.Orders;
 
 public interface IOrdersReadModel
 {

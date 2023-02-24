@@ -1,16 +1,16 @@
-﻿using EFO.Sales.Application.ReadModel;
+﻿using EFO.Sales.Application.ReadModel.Orders;
 using EFO.Sales.Domain;
 using EventForging.EventsHandling;
 
 namespace EFO.Sales.Application.EventHandling;
 
-internal class ReadModelBuildingEventHandlers :
+internal class OrdersReadModelBuildingEventHandlers :
     IEventHandler<OrderStarted>,
     IEventHandler<OrderCustomerAssigned>
 {
     private readonly IOrdersReadModel _ordersReadModel;
 
-    public ReadModelBuildingEventHandlers(IOrdersReadModel ordersReadModel)
+    public OrdersReadModelBuildingEventHandlers(IOrdersReadModel ordersReadModel)
     {
         _ordersReadModel = ordersReadModel ?? throw new ArgumentNullException(nameof(ordersReadModel));
     }

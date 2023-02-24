@@ -1,0 +1,114 @@
+﻿@page "/product-categories"
+@using EFO.Sales.WebUi.Data
+@using System.Text.Json
+
+<PageTitle>Catalog</PageTitle>
+
+<h1>Select Category</h1>
+
+
+@if (_products == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <div class="container-fluid">
+        <div class="row border">
+            <div class="col col-6">Product</div>
+            <div class="col col-2">Prices</div>
+            <div class="col col-2">Quantity</div>
+            <div class="col col-2"></div>
+        </div>
+        @foreach (var product in _products.Products)
+        {
+            <div class="row border">
+                <div class="col col-6">@product.Name</div>
+                <div class="col col-2">
+                    <table class="table table-sm p-0 m-0 text-end">
+                        <thead>
+                        <tr>
+                            <th class="border-0 fw-light p-0 m-0">Quantity:</th>
+                            <th class="border-0 fw-light p-0 m-0">Net Unit Price:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var price in product.Prices)
+                        {
+                            <tr>
+                                <td class="border-0 py-0 my-0">@price.QuantityThreshold+</td>
+                                <td class="border-0 py-0 my-0">@price.UnitPrice</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col col-2">
+                    <div class="row h-25">
+                        <div class="col">
+                            Minimum quantity: @product.Prices[0].QuantityThreshold
+                        </div>
+                    </div>
+                    <div class="row h-50">
+                        <div class="col align-self-center">
+                            <input type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row h-25"></div>
+                </div>
+                <div class="col col-2 align-self-center text-center">
+                    <button type="button" class="btn btn-primary">Add to order</button>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<button class="btn btn-primary" @onclick="StartOrderAsync">Click me</button>
+
+@code {
+
+    private string? _orders;
+    private ProductsDto? _products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CreateSamplesAsync();
+        await LoadProductsAsync();
+    }
+
+    private async Task StartOrderAsync()
+    {
+        var httpClient = new HttpClient();
+        var r = await httpClient.PostAsync(new Uri("http://localhost:5182/orders"), JsonContent.Create(new { CustomerId = Guid.NewGuid() }));
+        var id = await r.Content.ReadAsStringAsync();
+        await LoadOrderAsync(id.Trim('\"'));
+    }
+
+    private async Task LoadOrderAsync(string id)
+    {
+        var httpClient = new HttpClient();
+        var r = await httpClient.GetAsync(new Uri($"http://localhost:5182/orders/{id}"));
+        _orders = await r.Content.ReadAsStringAsync();
+    }
+
+    private async Task CreateSamplesAsync()
+    {
+        var httpClient = new HttpClient();
+        await httpClient.PostAsync(new Uri($"http://localhost:5182/products/samples"), null);
+    }
+
+    private async Task LoadProductsAsync()
+    {
+        var httpClient = new HttpClient();
+        var r = await httpClient.GetAsync(new Uri($"http://localhost:5182/products"));
+
+        var s = await r.Content.ReadAsStringAsync();
+
+        _products = JsonSerializer.Deserialize<ProductsDto>(s, new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, })!;
+    }
+
+
+}
