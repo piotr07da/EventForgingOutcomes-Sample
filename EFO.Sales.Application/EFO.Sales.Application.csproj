@@ -16,4 +16,8 @@
     <ProjectReference Include="..\EFO.Sales.Domain\EFO.Sales.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Queries\Customers\" />
+  </ItemGroup>
+
 </Project>

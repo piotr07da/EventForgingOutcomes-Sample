@@ -1,4 +1,4 @@
-﻿using EFO.Sales.Domain;
+﻿using EFO.Shared.Domain;
 using EventOutcomes;
 
 namespace EFO.Sales.Tests;

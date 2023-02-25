@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -26,6 +26,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SalesLocalizationResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Categories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EFO.Shared.Domain\EFO.Shared.Domain.csproj" />
   </ItemGroup>
 
 </Project>

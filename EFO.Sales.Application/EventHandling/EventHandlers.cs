@@ -1,4 +1,5 @@
-﻿using EFO.Sales.Domain;
+﻿using EFO.Sales.Domain.Orders;
+using EFO.Sales.Domain.Products;
 using EventForging.EventsHandling;
 using Microsoft.Extensions.Logging;
 

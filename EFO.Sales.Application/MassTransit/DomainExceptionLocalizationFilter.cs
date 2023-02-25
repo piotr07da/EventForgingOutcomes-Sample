@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Text;
-using EFO.Sales.Domain;
 using EFO.Sales.Domain.Localization;
+using EFO.Shared.Domain;
 using MassTransit;
 using Microsoft.Extensions.Localization;
 

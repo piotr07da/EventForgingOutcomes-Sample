@@ -1,5 +1,4 @@
 using EFO.Sales.Application.Commands;
-using EFO.Sales.Application.Queries;
 using EFO.Sales.Application.ReadModel.Products;
 using MassTransit.Mediator;
 using Microsoft.AspNetCore.Mvc;

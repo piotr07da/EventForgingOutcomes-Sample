@@ -1,4 +1,4 @@
-﻿using EFO.Sales.Application.Commands;
+﻿using EFO.Sales.Application.Commands.Orders;
 using MassTransit;
 
 // ReSharper disable once CheckNamespace

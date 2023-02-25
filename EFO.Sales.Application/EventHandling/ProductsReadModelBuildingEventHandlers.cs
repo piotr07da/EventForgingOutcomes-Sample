@@ -1,6 +1,7 @@
 ﻿using EFO.Sales.Application.ReadModel.Products;
-using EFO.Sales.Domain;
 using EventForging.EventsHandling;
+
+ling;
 
 namespace EFO.Sales.Application.EventHandling;
 
@@ -35,9 +36,10 @@ internal class ProductsReadModelBuildingEventHandlers :
     {
         var product = _productsReadModel.GetOrAdd(e.ProductId);
         var prices = product.Prices.ToList();
-        prices.Add(new ProductDto.Price(e.QuantityThreshold, e.UnitPrice));
+        pricesProductDto.PriceDto.Price(e.QuantityThreshold, e.UnitPrice));
         prices = prices.OrderBy(p => p.QuantityThreshold).ToList();
         product.Prices = prices.ToArray();
-        return Task.CompletedTask;
-    }
+        return Task.CompletedTas
+
+   }
 }

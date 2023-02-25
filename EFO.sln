@@ -18,7 +18,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.Sales.Application", "EF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.Sales.WebApi", "EFO.Sales.WebApi\EFO.Sales.WebApi.csproj", "{3AE529D8-50F9-409D-A66F-7A2A272516E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Sales.WebUi", "EFO.Sales.WebUi\EFO.Sales.WebUi.csproj", "{6887E63A-C25F-428C-AEB6-4053FB2A3AAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.Sales.WebUi", "EFO.Sales.WebUi\EFO.Sales.WebUi.csproj", "{6887E63A-C25F-428C-AEB6-4053FB2A3AAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Catalog.Application", "EFO.Catalog.Application\EFO.Catalog.Application.csproj", "{4928ED50-F5C3-4573-BD7D-D15061D74480}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Catalog.Domain", "EFO.Catalog.Domain\EFO.Catalog.Domain.csproj", "{58466788-81C8-492C-AC0F-FB7F1085A281}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Shared.Domain", "EFO.Shared.Domain\EFO.Shared.Domain.csproj", "{2E9076B6-32E7-42B5-AB03-23E454D3E2F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +52,18 @@ Global
 		{6887E63A-C25F-428C-AEB6-4053FB2A3AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6887E63A-C25F-428C-AEB6-4053FB2A3AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6887E63A-C25F-428C-AEB6-4053FB2A3AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4928ED50-F5C3-4573-BD7D-D15061D74480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4928ED50-F5C3-4573-BD7D-D15061D74480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4928ED50-F5C3-4573-BD7D-D15061D74480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4928ED50-F5C3-4573-BD7D-D15061D74480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58466788-81C8-492C-AC0F-FB7F1085A281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58466788-81C8-492C-AC0F-FB7F1085A281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58466788-81C8-492C-AC0F-FB7F1085A281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58466788-81C8-492C-AC0F-FB7F1085A281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E9076B6-32E7-42B5-AB03-23E454D3E2F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E9076B6-32E7-42B5-AB03-23E454D3E2F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E9076B6-32E7-42B5-AB03-23E454D3E2F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E9076B6-32E7-42B5-AB03-23E454D3E2F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

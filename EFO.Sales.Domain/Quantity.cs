@@ -1,4 +1,6 @@
-﻿namespace EFO.Sales.Domain;
+﻿using EFO.Shared.Domain;
+
+namespace EFO.Sales.Domain;
 
 public readonly struct Quantity
 {

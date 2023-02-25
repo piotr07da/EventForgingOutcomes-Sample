@@ -1,16 +1,21 @@
 in progress...
 
 # EventForgingOutcomes-Sample
-Purpose of this project is to show how to use:
-- [EventForging](https://github.com/piotr07da/EventForging) - event sourcing library.
-- [EventOutcomes](https://github.com/piotr07da/EventOutcomes) - library used to write unit tests for event sourced applications.
+The purpose of this project is to show how to use the following libraries:
+- [EventForging](https://github.com/piotr07da/EventForging) - used to create event sourced applications.
+- [EventOutcomes](https://github.com/piotr07da/EventOutcomes) - used to write unit tests for event sourced applications.
 
-Beside that this project contains some solutions that someone may find useful in their own project.
+In addition, this project includes some solutions that others may find useful in their own projects.
 
 This project is MIT licensed.
 
 ## Status
 [![build-n-test](https://github.com/piotr07da/EventForgingOutcomes-Sample/actions/workflows/build-n-test.yml/badge.svg)](https://github.com/piotr07da/EventForgingOutcomes-Sample/actions/workflows/build-n-test.yml)
+
+## The domain
+The domain is yet another online store. The example presented in this project has implementation of just two bounded contexts - `Catalog` and `Sales`.
+
+
 
 ## Architecture
 This project has three main layers: Application, Domain and Infrastructure.

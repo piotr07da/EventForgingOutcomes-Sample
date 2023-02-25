@@ -1,9 +1,10 @@
 ﻿using EFO.Sales.Application.EventHandling;
-using EFO.Sales.Domain;
 using EventForging;
 using EventForging.InMemory;
 using EventForging.Serialization;
 using MassTransit;
+
+it;
 
 namespace EFO.Sales.WebApi.ServiceCollectionExtensions;
 
@@ -34,5 +35,6 @@ internal static class InMemoryServiceCollectionExtensions
             {
             });
         });
-    }
+ 
+ }
 }

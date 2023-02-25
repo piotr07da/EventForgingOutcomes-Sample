@@ -1,6 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
-using EFO.Sales.Domain;
+using EFO.Sales.Domain.Orders;
+using EFO.Shared.Domain;
 using Xunit;
 
 namespace EFO.Sales.Tests;
