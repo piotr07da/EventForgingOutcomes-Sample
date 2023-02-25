@@ -33,18 +33,18 @@ Discount can be added on the order level automatically or by use of promotion co
 
 ## EventOutcomes
 
-Before we start writing actual unit tests, there is one important component that we need to implement.
-EventOutcomes requires us to implement the `IAdapter` interface to be able to write unit tests.
+The first step in using the EventOutcomes library is to implement the `IAdapter` interface.
 The implementation can be found in the **EFO.Shared.Tests** project.
-Additionally, there is a `FakeEventDatabase` implementation of the `IEventDatabase` interface from EventForging library,
-which is key component used by our `Adapter` implementation.
+The main purpose of implementing this component is to integrate EventOutcomes with any event sourcing framework - in our case EventForging.
+Because of that, there is also a `FakeEventDatabase` implementation of the `IEventDatabase` interface from the EventForging library,
+which is our key component.
 
-Once we have implemented the `IAdapter` interface, we can start writing our tests.
-The unit tests can be found in the **EFO.Sales.Tests** and **EFO.Catalog.Tests** projects.
+Once we have implemented the `IAdapter` interface and provided a fake implementation of the `IEventDatabase` interface,
+we can start writing our tests. The unit tests can be found in the **EFO.Sales.Tests** and **EFO.Catalog.Tests** projects.
 
-All of them are build in a way where a `Test` class is instantiated and the test is prepared using EventOutcomes fluent API.
-The initialization of the `Test` class can be shared between multiple tests. In that case the test is created in the constructor.
-Alternatively, an instance instance of the `Test` class can be created inside testing methods.
+The tests are build using a `Test` class, which is instantiated and prepared using the EventOutcomes fluent API.
+The `Test` class can be instantiated in the constructor of testing class and shared between multiple tests,
+or an instance of the `Test` class can be created inside testing methods.
 
 
 
