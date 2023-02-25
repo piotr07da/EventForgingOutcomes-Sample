@@ -1,21 +1,21 @@
 ﻿using System.Reflection;
 using System.Text;
-using EFO.Sales.Domain.Localization;
 using EFO.Shared.Domain;
 using MassTransit;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 
-namespace EFO.Sales.Application.MassTransit;
+namespace EFO.Shared.Application.MassTransit;
 
 public sealed class DomainExceptionLocalizationFilter<TConsumer, TMessage> : IFilter<ConsumerConsumeContext<TConsumer, TMessage>>
     where TConsumer : class
     where TMessage : class
 {
-    private readonly IStringLocalizer<SalesLocalizationResource> _localizer;
+    private readonly IStringLocalizer[] _localizers;
 
-    public DomainExceptionLocalizationFilter(IStringLocalizer<SalesLocalizationResource> localizer)
+    public DomainExceptionLocalizationFilter(IServiceProvider serviceProvider)
     {
-        _localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
+        _localizers = (serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider))).GetRequiredService<IEnumerable<IStringLocalizer>>().ToArray();
     }
 
     public void Probe(ProbeContext context)
@@ -33,14 +33,13 @@ public sealed class DomainExceptionLocalizationFilter<TConsumer, TMessage> : IFi
             var messageBuilder = new StringBuilder();
             foreach (var error in de.Errors)
             {
-                var localizerResult = _localizer[error.Name];
-                if (localizerResult.ResourceNotFound)
+                var localizedMessage = TryFindValue(error.Name);
+                if (localizedMessage is null)
                 {
                     messageBuilder.AppendLine(error.Name);
                 }
                 else
                 {
-                    var localizedMessage = localizerResult.Value;
                     foreach (var (key, value) in error.Data)
                     {
                         localizedMessage = localizedMessage.Replace($"{{{key}}}", value.ToString());
@@ -56,6 +55,20 @@ public sealed class DomainExceptionLocalizationFilter<TConsumer, TMessage> : IFi
 
             throw;
         }
+    }
+
+    private string? TryFindValue(string key)
+    {
+        foreach (var localizer in _localizers)
+        {
+            var localizerResult = localizer[key];
+            if (!localizerResult.ResourceNotFound)
+            {
+                return localizerResult.Value;
+            }
+        }
+
+        return null;
     }
 
     private static void ChangeMessage(Exception exception, string message)

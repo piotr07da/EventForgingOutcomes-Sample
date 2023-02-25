@@ -1,5 +1,5 @@
 using EFO.Sales.Application;
-using EFO.Sales.Application.MassTransit;
+using EFO.Shared.Application.MassTransit;
 using EFO.WebApi.ServiceCollectionExtensions;
 using MassTransit;
 

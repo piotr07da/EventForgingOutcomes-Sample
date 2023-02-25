@@ -1,7 +1,4 @@
-﻿using EFO.Sales.Application.MassTransit;
-using MassTransit;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Localization;
+﻿using MassTransit;
 
 namespace EFO.Shared.Application.MassTransit;
 
@@ -22,6 +19,6 @@ public class ConsumerConfigurationObserver : IConsumerConfigurationObserver
     public void ConsumerMessageConfigured<TConsumer, TMessage>(IConsumerMessageConfigurator<TConsumer, TMessage> configurator)
         where TConsumer : class where TMessage : class
     {
-        configurator.UseFilter(new DomainExceptionLocalizationFilter<TConsumer, TMessage>(_serviceProvider.GetRequiredService<IStringLocalizer<SalesLocalizationResource>>()));
+        configurator.UseFilter(new DomainExceptionLocalizationFilter<TConsumer, TMessage>(_serviceProvider));
     }
 }

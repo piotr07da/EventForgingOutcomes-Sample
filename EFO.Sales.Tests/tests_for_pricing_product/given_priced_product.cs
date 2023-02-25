@@ -1,5 +1,8 @@
 ﻿// ReSharper disable InconsistentNaming
 
+using EFO.Sales.Application.Commands.Products;
+using EFO.Sales.Domain;
+using EFO.Sales.Domain.Products;
 using EFO.Sales.Tests._TestingInfrastructure;
 using EventOutcomes;
 using Xunit;
@@ -60,7 +63,7 @@ public class given_priced_product
     {
         _test
             .When(new PriceProduct(_productId, QuantityLowerThanExistingThreshold, sameOrLowerPrice))
-            .ThenDomainExceptionWith(DomainErrors.PriceForLowerQuantityThresholdMustBeHigher);
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForLowerQuantityThresholdMustBeHigher);
         await _test.TestAsync();
     }
 
@@ -80,7 +83,7 @@ public class given_priced_product
     {
         _test
             .When(new PriceProduct(_productId, QuantityHigherThanExistingThreshold, sameOrHigherPrice))
-            .ThenDomainExceptionWith(DomainErrors.PriceForHigherQuantityThresholdMustBeLower);
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForHigherQuantityThresholdMustBeLower);
         await _test.TestAsync();
     }
 }

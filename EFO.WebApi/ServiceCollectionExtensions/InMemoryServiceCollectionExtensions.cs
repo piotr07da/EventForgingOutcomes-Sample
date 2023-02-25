@@ -1,4 +1,5 @@
-﻿using EFO.Sales.Application.EventHandling;
+﻿using EFO.Catalog.Domain.Categories;
+using EFO.Sales.Application.EventHandling;
 using EFO.Sales.Domain.Orders;
 using EventForging;
 using EventForging.InMemory;
@@ -15,14 +16,15 @@ internal static class InMemoryServiceCollectionExtensions
         {
             r.ConfigureEventForging(c =>
             {
-                c.Serialization.SetEventTypeNameMappers(new DefaultEventTypeNameMapper(typeof(OrderStarted).Assembly));
+                c.Serialization.SetEventTypeNameMappers(new DefaultEventTypeNameMapper(typeof(OrderStarted).Assembly)); // Sales
+                c.Serialization.SetEventTypeNameMappers(new DefaultEventTypeNameMapper(typeof(CategoryCreated).Assembly)); // Catalog
             });
             r.UseInMemory(c =>
             {
                 c.SerializationEnabled = true;
                 c.AddEventSubscription("MainPipeline");
             });
-            r.AddEventHandlers(typeof(EventHandlers).Assembly);
+            r.AddEventHandlers(typeof(SalesEventHandlers).Assembly);
         });
     }
 

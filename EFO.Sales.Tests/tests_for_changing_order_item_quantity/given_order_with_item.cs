@@ -1,7 +1,8 @@
 ﻿// ReSharper disable InconsistentNaming
 
-using EFO.Sales.Application.Commands;
-using EFO.Sales.Domain;
+using EFO.Sales.Application.Commands.Orders;
+using EFO.Sales.Domain.Orders;
+using EFO.Sales.Domain.Products;
 using EFO.Sales.Tests._TestingInfrastructure;
 using EventOutcomes;
 using Xunit;
@@ -13,14 +14,13 @@ public class given_order_with_item
     private readonly Test _test;
     private readonly Guid _orderId;
     private readonly Guid _orderItemId;
-    private readonly Guid _productId;
     private readonly (decimal UnitPrice, int QuantityThreshold)[] _productPrices;
 
     public given_order_with_item()
     {
         _orderId = Guid.NewGuid();
         _orderItemId = Guid.NewGuid();
-        _productId = Guid.NewGuid();
+        var productId = Guid.NewGuid();
         _productPrices = new[]
         {
             (20m, 1),
@@ -32,15 +32,15 @@ public class given_order_with_item
             .Given(
                 _orderId,
                 new OrderStarted(_orderId),
-                new OrderItemAdded(_orderId, _orderItemId, _productId),
+                new OrderItemAdded(_orderId, _orderItemId, productId),
                 new OrderItemQuantityChanged(_orderId, _orderItemId, 45),
                 new OrderPriced(_orderId, _productPrices[1].UnitPrice * 45))
             .Given(
-                _productId,
-                new ProductIntroduced(_productId),
-                new ProductPriced(_productId, _productPrices[0].QuantityThreshold, _productPrices[0].UnitPrice),
-                new ProductPriced(_productId, _productPrices[1].QuantityThreshold, _productPrices[1].UnitPrice),
-                new ProductPriced(_productId, _productPrices[2].QuantityThreshold, _productPrices[2].UnitPrice));
+                productId,
+                new ProductIntroduced(productId),
+                new ProductPriced(productId, _productPrices[0].QuantityThreshold, _productPrices[0].UnitPrice),
+                new ProductPriced(productId, _productPrices[1].QuantityThreshold, _productPrices[1].UnitPrice),
+                new ProductPriced(productId, _productPrices[2].QuantityThreshold, _productPrices[2].UnitPrice));
     }
 
     [Fact]

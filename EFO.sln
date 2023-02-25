@@ -32,8 +32,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Shared.Tests", "EFO.Sha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Shared.Application", "EFO.Shared.Application\EFO.Shared.Application.csproj", "{74091BC7-3DE7-4BB4-8FD8-A8366D00396D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Sales.Worker", "EFO.Sales.Worker\EFO.Sales.Worker.csproj", "{EFCD4CCB-35C9-45AD-9D8C-73EA3133F977}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,10 +82,6 @@ Global
 		{74091BC7-3DE7-4BB4-8FD8-A8366D00396D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74091BC7-3DE7-4BB4-8FD8-A8366D00396D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74091BC7-3DE7-4BB4-8FD8-A8366D00396D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EFCD4CCB-35C9-45AD-9D8C-73EA3133F977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EFCD4CCB-35C9-45AD-9D8C-73EA3133F977}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EFCD4CCB-35C9-45AD-9D8C-73EA3133F977}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EFCD4CCB-35C9-45AD-9D8C-73EA3133F977}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

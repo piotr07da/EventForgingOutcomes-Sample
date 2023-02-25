@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace EFO.Sales.Application.EventHandling;
 
-public sealed class EventHandlers :
+public sealed class SalesEventHandlers :
     IEventHandler<OrderStarted>,
     IEventHandler<OrderCustomerAssigned>,
     IEventHandler<ProductIntroduced>,
@@ -15,7 +15,7 @@ public sealed class EventHandlers :
     private readonly IEventDispatcher _eventDispatcher;
     private readonly ILogger _logger;
 
-    public EventHandlers(IEventDispatcher eventDispatcher, ILoggerFactory loggerFactory)
+    public SalesEventHandlers(IEventDispatcher eventDispatcher, ILoggerFactory loggerFactory)
     {
         _eventDispatcher = eventDispatcher ?? throw new ArgumentNullException(nameof(eventDispatcher));
         _logger = loggerFactory.CreateLogger("EFO.Sales.Application");

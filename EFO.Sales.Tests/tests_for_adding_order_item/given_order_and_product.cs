@@ -1,5 +1,9 @@
 ﻿// ReSharper disable InconsistentNaming
 
+using EFO.Sales.Application.Commands.Orders;
+using EFO.Sales.Domain;
+using EFO.Sales.Domain.Orders;
+using EFO.Sales.Domain.Products;
 using EFO.Sales.Tests._TestingInfrastructure;
 using EventOutcomes;
 using Xunit;
@@ -48,7 +52,7 @@ public class given_order_and_product
         _test
             .Given(_productId, new ProductPriced(_productId, 15, 100m))
             .When(new AddOrderItem(_orderId, _orderItemId, _productId, quantity))
-            .ThenDomainExceptionWith(DomainErrors.QuantityToLowForPricing);
+            .ThenDomainExceptionWith(SalesDomainErrors.QuantityToLowForPricing);
 
         await _test.TestAsync();
     }

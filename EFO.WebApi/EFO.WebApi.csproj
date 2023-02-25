@@ -8,6 +8,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EFO.Catalog.Domain\EFO.Catalog.Domain.csproj" />
     <ProjectReference Include="..\EFO.Sales.Application\EFO.Sales.Application.csproj" />
   </ItemGroup>
 

@@ -17,6 +17,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\EFO.Sales.Application\EFO.Sales.Application.csproj" />
+		<ProjectReference Include="..\EFO.Shared.Tests\EFO.Shared.Tests.csproj" />
 	</ItemGroup>
 
 </Project>

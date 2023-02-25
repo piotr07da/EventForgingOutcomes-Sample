@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using EventForging;
 
-namespace EFO.Sales.Tests._TestingInfrastructure;
+namespace EFO.Shared.Tests._TestingInfrastructure;
 
 public class FakeEventDatabase : IEventDatabase
 {

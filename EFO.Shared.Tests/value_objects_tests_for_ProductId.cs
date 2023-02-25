@@ -3,7 +3,7 @@
 using EFO.Shared.Domain;
 using Xunit;
 
-namespace EFO.Sales.Tests;
+namespace EFO.Shared.Tests;
 
 public sealed class value_objects_tests_for_ProductId
 {
@@ -11,6 +11,6 @@ public sealed class value_objects_tests_for_ProductId
     public void ProductId_cannot_be_empty()
     {
         var ex = Assert.Throws<DomainException>(() => ProductId.FromValue(Guid.Empty));
-        Assert.Contains(ex.Errors, e => e.Name == DomainErrors.ProductIdCannotBeEmpty);
+        Assert.Contains(ex.Errors, e => e.Name == SharedDomainErrors.ProductIdCannotBeEmpty);
     }
 }
