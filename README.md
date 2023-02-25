@@ -33,16 +33,18 @@ Discount can be added on the order level automatically or by use of promotion co
 
 ## EventOutcomes
 
-Before we go to writing actual unit tests is one important component to look at.
-EventOutcomes requires us to implement `IAdapter` interface to be able to write unit tests.
-The implementation is located in the `EFO.Shared.Tests` project.
-There is also `FakeEventDatabase` implementation of `IEventDatabase` interface which is important part used by out Adapter implementation.
+Before we start writing actual unit tests, there is one important component that we need to implement.
+EventOutcomes requires us to implement the `IAdapter` interface to be able to write unit tests.
+The implementation can be found in the **EFO.Shared.Tests** project.
+Additionally, there is a `FakeEventDatabase` implementation of the `IEventDatabase` interface from EventForging library,
+which is key component used by our `Adapter` implementation.
 
-Having implemented `IAdapter` interface we can start writing our tests.
-Unit tests can be found in EFO.Sales.Tests and EFO.Catalog.Tests projects.
-All of them are build in a way where `Test` class is instantiated and test is prepared using EventOutcomes fluent api.
-Initialization of `Test` class can be shared between multiple tests. In that case test is created in the constructor.
-In other cases instance of `Test` class can be created inside methods.
+Once we have implemented the `IAdapter` interface, we can start writing our tests.
+The unit tests can be found in the **EFO.Sales.Tests** and **EFO.Catalog.Tests** projects.
+
+All of them are build in a way where a `Test` class is instantiated and the test is prepared using EventOutcomes fluent API.
+The initialization of the `Test` class can be shared between multiple tests. In that case the test is created in the constructor.
+Alternatively, an instance instance of the `Test` class can be created inside testing methods.
 
 
 
