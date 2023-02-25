@@ -27,7 +27,7 @@ public readonly struct OrderId
     {
         if (value == Guid.Empty)
         {
-            throw new DomainException(new DomainError(DomainErrors.OrderIdCannotBeEmpty));
+            throw new DomainException(new DomainError(SalesDomainErrors.OrderIdCannotBeEmpty));
         }
 
         return new OrderId(value);

@@ -1,4 +1,5 @@
-﻿using EFO.Catalog.Domain.ProductProperties;
+﻿using EFO.Catalog.Domain.Categories;
+using EFO.Catalog.Domain.ProductProperties;
 using EFO.Shared.Domain;
 using EventForging;
 
@@ -27,15 +28,15 @@ public class Product : IEventForged
         return product;
     }
 
-    public void SetProperty(ProductPropertyName propertyName, ProductPropertyValue propertyValue)
+    public void SetProperty(PropertyId propertyId, NumericPropertyValue propertyValue)
     {
     }
 
-    public void SetProperty()
+    public void SetProperty(PropertyId propertyId, TextPropertyValue propertyValue)
     {
     }
 
-    public void MoveToCategory()
+    public void MoveToCategory(CategoryId categoryId)
     {
     }
 
@@ -50,7 +51,7 @@ public class Product : IEventForged
     {
     }
 
-    private void Apply(ProductValuePropertySet e)
+    private void Apply(ProductNumericPropertySet e)
     {
     }
 

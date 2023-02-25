@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<PackageReference Include="EventForging" Version="1.0.8-alpha" />
+		<PackageReference Include="MassTransit" Version="8.0.12" />
+		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\EFO.Shared.Domain\EFO.Shared.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

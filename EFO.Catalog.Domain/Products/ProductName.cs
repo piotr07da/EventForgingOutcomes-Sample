@@ -1,4 +1,6 @@
-﻿namespace EFO.Catalog.Domain.Products;
+﻿using EFO.Shared.Domain;
+
+namespace EFO.Catalog.Domain.Products;
 
 public readonly struct ProductName
 {
@@ -24,7 +26,7 @@ public readonly struct ProductName
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new DomainException(new DomainError(DomainErrors.ProductNameCannotBeEmpty));
+            throw new DomainException(new DomainError(CatalogDomainErrors.ProductNameCannotBeEmpty));
         }
 
         return new ProductName(value);

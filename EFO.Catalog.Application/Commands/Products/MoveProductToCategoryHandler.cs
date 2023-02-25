@@ -1,4 +1,6 @@
-﻿using EventForging;
+﻿using EFO.Catalog.Domain.Products;
+using EventForging;
+using MassTransit;
 
 namespace EFO.Catalog.Application.Commands.Products;
 

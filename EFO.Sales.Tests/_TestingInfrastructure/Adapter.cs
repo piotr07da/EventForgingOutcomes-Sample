@@ -1,12 +1,11 @@
 ﻿using EFO.Sales.Application;
+using EFO.Sales.Application.Commands.Orders;
 using EFO.Sales.Application.MassTransit;
 using EventForging;
 using EventOutcomes;
 using MassTransit;
 using MassTransit.Mediator;
 using Microsoft.Extensions.DependencyInjection;
-
-on;
 
 namespace EFO.Sales.Tests._TestingInfrastructure;
 
@@ -69,6 +68,5 @@ public class Adapter : IAdapter
     public async Task DispatchCommandAsync(object command)
     {
         await Mediator.Publish(command);
- 
- }
+    }
 }

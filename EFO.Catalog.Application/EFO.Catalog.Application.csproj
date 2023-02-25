@@ -1,17 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="EventForging" Version="1.0.8-alpha" />
+		<PackageReference Include="MassTransit" Version="8.0.12" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\ProductProperties\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\EFO.Catalog.Domain\EFO.Catalog.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\EFO.Catalog.Domain\EFO.Catalog.Domain.csproj" />
+		<ProjectReference Include="..\EFO.Shared.Application\EFO.Shared.Application.csproj" />
+	</ItemGroup>
 
 </Project>

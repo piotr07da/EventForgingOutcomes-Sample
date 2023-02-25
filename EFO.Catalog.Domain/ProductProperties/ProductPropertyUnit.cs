@@ -1,4 +1,6 @@
-﻿namespace EFO.Catalog.Domain.ProductProperties;
+﻿using EFO.Shared.Domain;
+
+namespace EFO.Catalog.Domain.ProductProperties;
 
 public readonly struct ProductPropertyUnit
 {
@@ -24,7 +26,7 @@ public readonly struct ProductPropertyUnit
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new DomainException(new DomainError(DomainErrors.ProductPropertyUnitCannotBeEmpty));
+            throw new DomainException(new DomainError(CatalogDomainErrors.PropertyUnitCannotBeEmpty));
         }
 
         return new ProductPropertyUnit(value);

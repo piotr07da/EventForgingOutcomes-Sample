@@ -1,4 +1,6 @@
-﻿using EventForging;
+﻿using EFO.Catalog.Domain.Products;
+using EventForging;
+using MassTransit;
 
 namespace EFO.Catalog.Application.Commands.Products;
 
@@ -17,7 +19,7 @@ public sealed class SetProductTextPropertyHandler : IConsumer<SetProductTextProp
 
         var product = await _productRepository.GetAsync(command.ProductId, context);
 
-        product.SetTextProperty(command.PropertyName, command.PropertyText);
+        product.SetProperty(command.PropertyId, command.PropertyText);
 
         await _productRepository.SaveAsync(command.ProductId, product, context);
     }

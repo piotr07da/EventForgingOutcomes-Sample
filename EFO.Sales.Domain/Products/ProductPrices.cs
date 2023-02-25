@@ -32,7 +32,7 @@ public class ProductPrices
             }
         }
 
-        throw new DomainException(new DomainError(DomainErrors.QuantityToLowForPricing)
+        throw new DomainException(new DomainError(SalesDomainErrors.QuantityToLowForPricing)
             .WithData("Quantity", quantity)
             .WithData("MinimalQuantity", PricesOrderedByQuantityThreshold[0].QuantityThreshold));
     }
@@ -41,12 +41,12 @@ public class ProductPrices
     {
         if (PriceForLowerQuantityThresholdIfSuchExistsIsSameOrLower(quantityThreshold, unitPrice))
         {
-            throw new DomainException(new DomainError(DomainErrors.PriceForLowerQuantityThresholdMustBeHigher));
+            throw new DomainException(new DomainError(SalesDomainErrors.PriceForLowerQuantityThresholdMustBeHigher));
         }
 
         if (PriceForHigherQuantityThresholdIfSuchExistsIsSameOrHigher(quantityThreshold, unitPrice))
         {
-            throw new DomainException(new DomainError(DomainErrors.PriceForHigherQuantityThresholdMustBeLower));
+            throw new DomainException(new DomainError(SalesDomainErrors.PriceForHigherQuantityThresholdMustBeLower));
         }
 
         Events.Apply(new ProductPriced(_product.Id, quantityThreshold, unitPrice));

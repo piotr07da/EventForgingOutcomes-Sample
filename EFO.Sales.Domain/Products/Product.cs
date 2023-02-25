@@ -1,5 +1,4 @@
-﻿using EFO.Sales.Domain.ProductProperties;
-using EFO.Shared.Domain;
+﻿using EFO.Shared.Domain;
 using EventForging;
 
 namespace EFO.Sales.Domain.Products;
@@ -32,18 +31,6 @@ public class Product : IEventForged
     public void Price(Quantity quantityThreshold, Money unitPrice)
     {
         Prices.Add(quantityThreshold, unitPrice);
-    }
-
-    public void SetProperty(ProductPropertyName propertyName, ProductPropertyValue propertyValue)
-    {
-    }
-
-    public void SetProperty()
-    {
-    }
-
-    public void MoveToCategory()
-    {
     }
 
     // --------------------------------------------------- APPLY EVENTS ---------------------------------------------------

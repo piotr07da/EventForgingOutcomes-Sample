@@ -1,7 +1,5 @@
 ﻿// ReSharper disable InconsistentNaming
 
-using EFO.Sales.Application.Commands;
-using EFO.Sales.Domain;
 using EFO.Sales.Tests._TestingInfrastructure;
 using EventOutcomes;
 using Xunit;

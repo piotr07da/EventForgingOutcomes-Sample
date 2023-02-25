@@ -1,5 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
+using EFO.Sales.Domain;
+using EFO.Sales.Domain.Products;
 using EFO.Shared.Domain;
 using Xunit;
 
@@ -14,6 +16,6 @@ public sealed class value_objects_tests_for_ProductName
     public void ProductName_cannot_be_empty(string emptyProductName)
     {
         var ex = Assert.Throws<DomainException>(() => ProductName.FromValue(emptyProductName));
-        Assert.Contains(ex.Errors, e => e.Name == DomainErrors.ProductNameCannotBeEmpty);
+        Assert.Contains(ex.Errors, e => e.Name == SalesDomainErrors.ProductNameCannotBeEmpty);
     }
 }

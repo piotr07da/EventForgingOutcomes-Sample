@@ -26,7 +26,7 @@ public readonly struct ProductName
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new DomainException(new DomainError(DomainErrors.ProductNameCannotBeEmpty));
+            throw new DomainException(new DomainError(SalesDomainErrors.ProductNameCannotBeEmpty));
         }
 
         return new ProductName(value);

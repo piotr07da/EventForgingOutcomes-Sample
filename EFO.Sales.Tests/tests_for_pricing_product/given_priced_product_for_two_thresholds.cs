@@ -1,5 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 
+using EFO.Sales.Application.Commands.Products;
 using EFO.Sales.Domain;
 using EFO.Sales.Domain.Products;
 using EFO.Sales.Tests._TestingInfrastructure;
@@ -90,7 +91,7 @@ public class given_priced_product_for_two_thresholds
     {
         await _test
             .When(new PriceProduct(_productId, QuantityLowerThanFirstThreshold, _firstThresholdPrice))
-            .ThenDomainExceptionWith(DomainErrors.PriceForLowerQuantityThresholdMustBeHigher)
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForLowerQuantityThresholdMustBeHigher)
             .TestAsync();
     }
 
@@ -99,7 +100,7 @@ public class given_priced_product_for_two_thresholds
     {
         await _test
             .When(new PriceProduct(_productId, QuantityLowerThanFirstThreshold, PriceLowerThanFirstThreshold))
-            .ThenDomainExceptionWith(DomainErrors.PriceForLowerQuantityThresholdMustBeHigher)
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForLowerQuantityThresholdMustBeHigher)
             .TestAsync();
     }
 
@@ -117,7 +118,7 @@ public class given_priced_product_for_two_thresholds
     {
         await _test
             .When(new PriceProduct(_productId, _firstThresholdQuantity, _secondThresholdPrice))
-            .ThenDomainExceptionWith(DomainErrors.PriceForLowerQuantityThresholdMustBeHigher)
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForLowerQuantityThresholdMustBeHigher)
             .TestAsync();
     }
 
@@ -126,7 +127,7 @@ public class given_priced_product_for_two_thresholds
     {
         await _test
             .When(new PriceProduct(_productId, _firstThresholdQuantity, PriceLowerThanSecondThreshold))
-            .ThenDomainExceptionWith(DomainErrors.PriceForLowerQuantityThresholdMustBeHigher)
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForLowerQuantityThresholdMustBeHigher)
             .TestAsync();
     }
 
@@ -144,7 +145,7 @@ public class given_priced_product_for_two_thresholds
     {
         await _test
             .When(new PriceProduct(_productId, QuantityBetweenFirstAndSecondThreshold, PriceHigherThanFirstThreshold))
-            .ThenDomainExceptionWith(DomainErrors.PriceForHigherQuantityThresholdMustBeLower)
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForHigherQuantityThresholdMustBeLower)
             .TestAsync();
     }
 
@@ -153,7 +154,7 @@ public class given_priced_product_for_two_thresholds
     {
         await _test
             .When(new PriceProduct(_productId, QuantityBetweenFirstAndSecondThreshold, PriceLowerThanSecondThreshold))
-            .ThenDomainExceptionWith(DomainErrors.PriceForLowerQuantityThresholdMustBeHigher)
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForLowerQuantityThresholdMustBeHigher)
             .TestAsync();
     }
 
@@ -171,7 +172,7 @@ public class given_priced_product_for_two_thresholds
     {
         await _test
             .When(new PriceProduct(_productId, _secondThresholdQuantity, _firstThresholdPrice))
-            .ThenDomainExceptionWith(DomainErrors.PriceForHigherQuantityThresholdMustBeLower)
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForHigherQuantityThresholdMustBeLower)
             .TestAsync();
     }
 
@@ -180,7 +181,7 @@ public class given_priced_product_for_two_thresholds
     {
         await _test
             .When(new PriceProduct(_productId, _secondThresholdQuantity, PriceHigherThanFirstThreshold))
-            .ThenDomainExceptionWith(DomainErrors.PriceForHigherQuantityThresholdMustBeLower)
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForHigherQuantityThresholdMustBeLower)
             .TestAsync();
     }
 
@@ -198,7 +199,7 @@ public class given_priced_product_for_two_thresholds
     {
         await _test
             .When(new PriceProduct(_productId, QuantityHigherThanSecondThreshold, _secondThresholdPrice))
-            .ThenDomainExceptionWith(DomainErrors.PriceForHigherQuantityThresholdMustBeLower)
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForHigherQuantityThresholdMustBeLower)
             .TestAsync();
     }
 
@@ -207,7 +208,7 @@ public class given_priced_product_for_two_thresholds
     {
         await _test
             .When(new PriceProduct(_productId, QuantityHigherThanSecondThreshold, PriceHigherThanSecondThreshold))
-            .ThenDomainExceptionWith(DomainErrors.PriceForHigherQuantityThresholdMustBeLower)
+            .ThenDomainExceptionWith(SalesDomainErrors.PriceForHigherQuantityThresholdMustBeLower)
             .TestAsync();
     }
 }

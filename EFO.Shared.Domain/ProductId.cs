@@ -25,7 +25,7 @@ public readonly struct ProductId
     {
         if (value == Guid.Empty)
         {
-            throw new DomainException(new DomainError(DomainErrors.ProductIdCannotBeEmpty));
+            throw new DomainException(new DomainError(SharedDomainErrors.ProductIdCannotBeEmpty));
         }
 
         return new ProductId(value);

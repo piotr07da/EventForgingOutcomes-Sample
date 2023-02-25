@@ -1,4 +1,5 @@
 ﻿using EFO.Sales.Application.ReadModel.Orders;
+using EFO.Sales.Domain.Orders;
 using EventForging.EventsHandling;
 
 namespace EFO.Sales.Application.EventHandling;

@@ -1,10 +1,8 @@
 ﻿// ReSharper disable InconsistentNaming
 
+using EFO.Sales.Domain.Orders;
 using EFO.Sales.Tests._TestingInfrastructure;
 using EventOutcomes;
-using Xunit;
-
-EventOutcomes;
 using Xunit;
 
 namespace EFO.Sales.Tests;
@@ -50,8 +48,6 @@ public class order_public_properties_checks
         await _test
             .Given(new OrderStarted(_orderId), new OrderItemAdded(_orderId, orderItemId, orderItemProductId), new OrderItemQuantityChanged(_orderId, orderItemId, 5463))
             .ThenAggregate<Order>(_orderId, order => order.Items.Contains(orderItemId) && order.Items.Find(orderItemId).Quantity == 5463)
-
- 
-       .TestAsync();
+            .TestAsync();
     }
 }
