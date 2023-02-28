@@ -23,15 +23,15 @@ public sealed class SalesEventHandlers :
 
     public string SubscriptionName => "MainPipeline";
 
-    public async Task Handle(OrderStarted e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+    public async Task HandleAsync(OrderStarted e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 
-    public async Task Handle(OrderCustomerAssigned e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+    public async Task HandleAsync(OrderCustomerAssigned e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 
-    public async Task Handle(ProductIntroduced e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+    public async Task HandleAsync(ProductIntroduced e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 
-    public async Task Handle(ProductNamed e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+    public async Task HandleAsync(ProductNamed e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 
-    public async Task Handle(ProductPriced e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+    public async Task HandleAsync(ProductPriced e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 
     private async Task DispatchAsync(object e, EventInfo ei, CancellationToken cancellationToken)
     {

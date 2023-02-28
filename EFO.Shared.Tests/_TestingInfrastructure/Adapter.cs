@@ -30,7 +30,6 @@ public class Adapter : IAdapter
 
         configure(services);
 
-        // register all other services here - your main application registration code and all other fakes used for your tests
         ServiceProvider = services.BuildServiceProvider();
 
         FakeEventDatabase.Initialize();

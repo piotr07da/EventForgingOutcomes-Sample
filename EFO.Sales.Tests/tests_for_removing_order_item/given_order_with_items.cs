@@ -2,7 +2,6 @@
 
 using EFO.Sales.Application.Commands.Orders;
 using EFO.Sales.Domain.Orders;
-using EFO.Sales.Tests._TestingInfrastructure;
 using EventOutcomes;
 using Xunit;
 

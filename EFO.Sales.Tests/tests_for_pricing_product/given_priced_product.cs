@@ -3,7 +3,6 @@
 using EFO.Sales.Application.Commands.Products;
 using EFO.Sales.Domain;
 using EFO.Sales.Domain.Products;
-using EFO.Sales.Tests._TestingInfrastructure;
 using EventOutcomes;
 using Xunit;
 

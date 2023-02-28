@@ -17,13 +17,13 @@ internal class OrdersReadModelBuildingEventHandlers :
 
     public string SubscriptionName => "ReadModelBuilder";
 
-    public Task Handle(OrderStarted e, EventInfo ei, CancellationToken cancellationToken)
+    public Task HandleAsync(OrderStarted e, EventInfo ei, CancellationToken cancellationToken)
     {
         _ordersReadModel.GetOrAdd(e.OrderId);
         return Task.CompletedTask;
     }
 
-    public Task Handle(OrderCustomerAssigned e, EventInfo ei, CancellationToken cancellationToken)
+    public Task HandleAsync(OrderCustomerAssigned e, EventInfo ei, CancellationToken cancellationToken)
     {
         var order = _ordersReadModel.GetOrAdd(e.OrderId);
         order.CustomerId = e.CustomerId;

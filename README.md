@@ -28,6 +28,11 @@ Sales context is also responsible for collecting orders. Orders have order items
 Discount can be added on the order level automatically or by use of promotion code.
 
 ## EventForging
+The aggregates can be found in the **EFO.Sales.Domain** and **EFO.Catalog.Domain** projects.
+Each aggregate has the `Events` property initialized in the constructor. This property is used inside an aggregate operations
+to apply new events. State of aggregates is restored inside private `Apply` methods.
+
+EventForging does not ... this sample project gives proposition how entities can be done. We can ...
 
 
 

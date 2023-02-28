@@ -18,20 +18,20 @@ internal class ProductsReadModelBuildingEventHandlers :
 
     public string SubscriptionName => "ReadModelBuilder";
 
-    public Task Handle(ProductIntroduced e, EventInfo ei, CancellationToken cancellationToken)
+    public Task HandleAsync(ProductIntroduced e, EventInfo ei, CancellationToken cancellationToken)
     {
         _productsReadModel.GetOrAdd(e.ProductId);
         return Task.CompletedTask;
     }
 
-    public Task Handle(ProductNamed e, EventInfo ei, CancellationToken cancellationToken)
+    public Task HandleAsync(ProductNamed e, EventInfo ei, CancellationToken cancellationToken)
     {
         var product = _productsReadModel.GetOrAdd(e.ProductId);
         product.Name = e.Name;
         return Task.CompletedTask;
     }
 
-    public Task Handle(ProductPriced e, EventInfo ei, CancellationToken cancellationToken)
+    public Task HandleAsync(ProductPriced e, EventInfo ei, CancellationToken cancellationToken)
     {
         var product = _productsReadModel.GetOrAdd(e.ProductId);
         var prices = product.Prices.ToList();
