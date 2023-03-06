@@ -1,6 +1,7 @@
-﻿@page "/product-categories"
+﻿@page "/products"
 @using System.Text.Json
 @using EFO.WebUi.Data
+@inject IOrderService OrderService
 
 <PageTitle>Catalog</PageTitle>
 
@@ -16,50 +17,56 @@
 else
 {
     <div class="container-fluid">
-        <div class="row border">
-            <div class="col col-6">Product</div>
-            <div class="col col-2">Prices</div>
-            <div class="col col-2">Quantity</div>
-            <div class="col col-2"></div>
+        <div class="row bg-dark text-light">
+            <div class="col col-6 border-end py-2">Product</div>
+            <div class="col col-2 border-end py-2">Price per Quantity</div>
+            <div class="col col-2 border-end py-2">Quantity</div>
+            <div class="col col-2 py-2"></div>
         </div>
-        @foreach (var product in _products.Products)
+        @for (var pIx =0; pIx < _products.Products.Length; ++pIx)
         {
-            <div class="row border">
-                <div class="col col-6">@product.Name</div>
-                <div class="col col-2">
-                    <table class="table table-sm p-0 m-0 text-end">
+            var productIndex = pIx;
+            var product = _products.Products[pIx];
+
+            <div class="row border-bottom border">
+                <div class="col col-6 py-3 fw-bold">@product.Name</div>
+                <div class="col col-2 py-3">
+                    <table class="table table-sm p-0 m-0 text-end w-auto">
                         <thead>
                         <tr>
-                            <th class="border-0 fw-light p-0 m-0">Quantity:</th>
-                            <th class="border-0 fw-light p-0 m-0">Net Unit Price:</th>
+                            <th class="border-0 fw-light p-0 px-3 m-0">Quantity:</th>
+                            <th class="border-0 fw-light p-0 px-3 m-0">Net Unit Price:</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach (var price in product.Prices)
                         {
                             <tr>
-                                <td class="border-0 py-0 my-0">@price.QuantityThreshold+</td>
-                                <td class="border-0 py-0 my-0">@price.UnitPrice</td>
+                                <td class="border-0 py-0 my-0 px-3">@price.QuantityThreshold+</td>
+                                <td class="border-0 py-0 my-0 px-3 fw-bold">@price.UnitPrice.ToString("N2")</td>
                             </tr>
                         }
                         </tbody>
                     </table>
                 </div>
-                <div class="col col-2">
+                <div class="col col-2 py-3">
                     <div class="row h-25">
-                        <div class="col">
+                        <div class="col text-center">
                             Minimum quantity: @product.Prices[0].QuantityThreshold
                         </div>
                     </div>
                     <div class="row h-50">
-                        <div class="col align-self-center">
-                            <input type="text" class="form-control"/>
+                        <div class="col align-self-center d-flex justify-content-center">
+                            <input type="text" class="form-control w-50" @bind-value="@_quantities![productIndex]" />
                         </div>
                     </div>
                     <div class="row h-25"></div>
                 </div>
-                <div class="col col-2 align-self-center text-center">
-                    <button type="button" class="btn btn-primary">Add to order</button>
+                <div class="col col-2 align-self-center text-center py-3">
+                    <button type="button" class="btn btn-primary" @onclick="async args =>
+{
+    await OrderService.AddOrderItemAsync(new AddOrderItemDto(product.ProductId, _quantities![productIndex]));
+}">Add to order</button>
                 </div>
             </div>
         }
@@ -68,7 +75,9 @@ else
 
 <button class="btn btn-primary" @onclick="StartOrderAsync">Click me</button>
 
-@code {
+@code
+{
+    private int[]? _quantities;
 
     private string? _orders;
     private ProductsDto? _products;
@@ -78,6 +87,7 @@ else
         await CreateSamplesAsync();
         await LoadProductsAsync();
     }
+
 
     private async Task StartOrderAsync()
     {
@@ -108,6 +118,7 @@ else
         var s = await r.Content.ReadAsStringAsync();
 
         _products = JsonSerializer.Deserialize<ProductsDto>(s, new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, })!;
+        _quantities = new int[_products.Products.Length];
     }
 
 

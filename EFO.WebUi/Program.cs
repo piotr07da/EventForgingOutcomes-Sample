@@ -8,10 +8,13 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        var services = builder.Services;
+
         // Add services to the container.
-        builder.Services.AddRazorPages();
-        builder.Services.AddServerSideBlazor();
-        builder.Services.AddSingleton<WeatherForecastService>();
+        services.AddRazorPages();
+        services.AddServerSideBlazor();
+        services.AddSingleton<WeatherForecastService>();
+        services.AddSingleton<IOrderService, OrderService>();
 
         var app = builder.Build();
 

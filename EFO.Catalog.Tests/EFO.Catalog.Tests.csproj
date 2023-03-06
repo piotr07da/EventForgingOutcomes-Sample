@@ -16,7 +16,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\EFO.Catalog.Application\EFO.Catalog.Application.csproj" />
+	  <ProjectReference Include="..\EFO.Catalog.Domain\EFO.Catalog.Domain.csproj" />
+	  <ProjectReference Include="..\EFO.Shared.Domain\EFO.Shared.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

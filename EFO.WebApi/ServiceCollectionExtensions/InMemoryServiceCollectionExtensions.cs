@@ -16,8 +16,10 @@ internal static class InMemoryServiceCollectionExtensions
         {
             r.ConfigureEventForging(c =>
             {
-                c.Serialization.SetEventTypeNameMappers(new DefaultEventTypeNameMapper(typeof(OrderStarted).Assembly)); // Sales
-                c.Serialization.SetEventTypeNameMappers(new DefaultEventTypeNameMapper(typeof(CategoryCreated).Assembly)); // Catalog
+                c.Serialization.SetEventTypeNameMappers(
+                    new DefaultEventTypeNameMapper(typeof(OrderStarted).Assembly), // Sales
+                    new DefaultEventTypeNameMapper(typeof(CategoryCreated).Assembly) // Catalog
+                );
             });
             r.UseInMemory(c =>
             {
