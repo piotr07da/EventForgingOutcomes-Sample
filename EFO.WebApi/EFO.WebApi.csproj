@@ -1,13 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<ItemGroup>
-		<PackageReference Include="EventForging.InMemory" Version="1.0.9-alpha" />
+		<PackageReference Include="EventForging.InMemory" Version="1.0.10-alpha" />
 		<PackageReference Include="MassTransit" Version="8.0.12" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.3" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\EFO.Application\EFO.Application.csproj" />
+		<ProjectReference Include="..\EFO.Catalog.Application\EFO.Catalog.Application.csproj" />
 		<ProjectReference Include="..\EFO.Catalog.Domain\EFO.Catalog.Domain.csproj" />
 		<ProjectReference Include="..\EFO.Sales.Application\EFO.Sales.Application.csproj" />
 		<ProjectReference Include="..\EFO.Sales.Domain\EFO.Sales.Domain.csproj" />

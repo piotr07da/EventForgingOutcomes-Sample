@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.Shared.Tests", "EFO.Sha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.Shared.Application", "EFO.Shared.Application\EFO.Shared.Application.csproj", "{74091BC7-3DE7-4BB4-8FD8-A8366D00396D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFO.Application", "EFO.Application\EFO.Application.csproj", "{A86D4A3F-C656-429E-9F32-CA7D64B851A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{74091BC7-3DE7-4BB4-8FD8-A8366D00396D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74091BC7-3DE7-4BB4-8FD8-A8366D00396D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74091BC7-3DE7-4BB4-8FD8-A8366D00396D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A86D4A3F-C656-429E-9F32-CA7D64B851A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86D4A3F-C656-429E-9F32-CA7D64B851A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86D4A3F-C656-429E-9F32-CA7D64B851A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86D4A3F-C656-429E-9F32-CA7D64B851A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

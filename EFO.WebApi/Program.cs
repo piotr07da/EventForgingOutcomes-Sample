@@ -1,7 +1,6 @@
+using EFO.Catalog.Application;
 using EFO.Sales.Application;
-using EFO.Shared.Application.MassTransit;
 using EFO.WebApi.ServiceCollectionExtensions;
-using MassTransit;
 
 namespace EFO.WebApi;
 
@@ -20,23 +19,16 @@ public class Program
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
-        services.AddMediator(x =>
-        {
-            x.AddSalesApplicationLayerConsumers();
+        services.AddCatalogApplicationLayer();
+        services.AddSalesApplicationLayer();
 
-            x.ConfigureMediator((registrationContext, configurator) =>
-            {
-                configurator.ConnectConsumerConfigurationObserver(new ConsumerConfigurationObserver(registrationContext));
-            });
-        });
+        services.AddAndConfigureEventForging();
 
-        services.AddInMemoryEventForging();
-        services.AddInMemoryMassTransit();
+        services.AddAndConfigureMediator();
+        services.AddAndConfigureMassTransit();
 
         services.AddLogging();
         services.AddLocalization();
-
-        services.AddSalesApplicationLayer();
 
         var app = builder.Build();
 

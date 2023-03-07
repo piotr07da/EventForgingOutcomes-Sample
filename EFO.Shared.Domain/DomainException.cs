@@ -1,4 +1,6 @@
-﻿namespace EFO.Shared.Domain;
+﻿using System.Text;
+
+namespace EFO.Shared.Domain;
 
 public class DomainException : Exception
 {
@@ -16,5 +18,17 @@ public class DomainException : Exception
         {
             throw new DomainException(errorsArray);
         }
+    }
+
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("DomainException:");
+        foreach (var error in Errors)
+        {
+            sb.AppendLine(error.Name);
+        }
+
+        return sb.ToString();
     }
 }

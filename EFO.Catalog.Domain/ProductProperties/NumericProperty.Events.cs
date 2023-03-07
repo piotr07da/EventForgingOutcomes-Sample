@@ -1,3 +1,3 @@
 ﻿namespace EFO.Catalog.Domain.ProductProperties;
 
-public sealed record ProductValuePropertyDefined(Guid ProductPropertyId, string PropertyName, string PropertyUnit);
+public sealed record NumericPropertyDefined(Guid PropertyId, string PropertyName, string PropertyUnit);

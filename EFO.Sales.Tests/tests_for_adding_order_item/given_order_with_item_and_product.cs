@@ -22,6 +22,7 @@ public class given_order_with_item_and_product
         _orderId = Guid.NewGuid();
         _orderItemId = Guid.NewGuid();
         _productId = Guid.NewGuid();
+
         _alreadyAddedItemPrice = 1000m;
         _productUnitPrice = 25m;
         var alreadyAddedItemId = Guid.NewGuid();
@@ -37,7 +38,7 @@ public class given_order_with_item_and_product
     }
 
     [Fact]
-    public async Task when_AddOrderItem_then_order_priced_as_sum_of_both_items_prices()
+    public async Task when_AddOrderItem_then_order_priced_as_sum_of_both_added_items_prices()
     {
         const int quantity = 17;
 

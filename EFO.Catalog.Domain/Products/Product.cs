@@ -28,12 +28,14 @@ public class Product : IEventForged
         return product;
     }
 
-    public void SetProperty(PropertyId propertyId, NumericPropertyValue propertyValue)
+    public void SetProperty(NumericProperty property, NumericPropertyValue propertyValue)
     {
+        Events.Apply(new ProductNumericPropertySet(Id, property.Id, propertyValue));
     }
 
-    public void SetProperty(PropertyId propertyId, TextPropertyValue propertyValue)
+    public void SetProperty(TextProperty property, TextPropertyValue propertyValue)
     {
+        Events.Apply(new ProductTextPropertySet(Id, property.Id, propertyValue));
     }
 
     public void MoveToCategory(CategoryId categoryId)
