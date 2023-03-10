@@ -1,10 +1,17 @@
-﻿using EFO.Catalog.Domain.Products;
+﻿using EFO.Catalog.Domain.Categories;
+using EFO.Catalog.Domain.ProductProperties;
+using EFO.Catalog.Domain.Products;
 using EventForging.EventsHandling;
 using Microsoft.Extensions.Logging;
 
 namespace EFO.Catalog.Application.EventHandling;
 
 public sealed class CatalogEventHandlers :
+    IEventHandler<CategoryAdded>,
+    IEventHandler<CategoryNamed>,
+    IEventHandler<CategoryAttachedToParent>,
+    IEventHandler<NumericPropertyDefined>,
+    IEventHandler<TextPropertyDefined>,
     IEventHandler<ProductIntroduced>,
     IEventHandler<ProductNamed>,
     IEventHandler<ProductMovedToCategory>,
@@ -21,6 +28,16 @@ public sealed class CatalogEventHandlers :
     }
 
     public string SubscriptionName => "MainPipeline";
+
+    public async Task HandleAsync(CategoryAdded e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+
+    public async Task HandleAsync(CategoryNamed e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+
+    public async Task HandleAsync(NumericPropertyDefined e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+
+    public async Task HandleAsync(TextPropertyDefined e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+
+    public async Task HandleAsync(CategoryAttachedToParent e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 
     public async Task HandleAsync(ProductIntroduced e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 
@@ -43,6 +60,6 @@ public sealed class CatalogEventHandlers :
             _logger.LogError(ex, ex.Message);
         }
 
-        await _eventDispatcher.DispatchAsync("IntegrationEventsPublished", e, ei, cancellationToken);
+        await _eventDispatcher.DispatchAsync("IntegrationEventsPublisher", e, ei, cancellationToken);
     }
 }

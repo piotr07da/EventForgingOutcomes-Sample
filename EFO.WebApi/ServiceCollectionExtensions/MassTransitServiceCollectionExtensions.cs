@@ -1,5 +1,6 @@
 ﻿using EFO.Sales.Application;
 using EFO.Shared.Application.MassTransit;
+using EFO.SharedReadModel;
 using MassTransit;
 
 namespace EFO.WebApi.ServiceCollectionExtensions;
@@ -12,6 +13,7 @@ internal static class MassTransitServiceCollectionExtensions
         {
             r.AddCatalogApplicationLayerConsumers();
             r.AddSalesApplicationLayerConsumers();
+            r.AddSharedReadModelConsumers();
 
             r.ConfigureMediator((rc, c) =>
             {
@@ -26,6 +28,7 @@ internal static class MassTransitServiceCollectionExtensions
         {
             r.AddCatalogApplicationLayerConsumers();
             r.AddSalesApplicationLayerConsumers();
+            r.AddSharedReadModelConsumers();
 
             r.UsingInMemory((rc, c) =>
             {

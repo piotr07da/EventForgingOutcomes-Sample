@@ -40,6 +40,7 @@ public class Product : IEventForged
 
     public void MoveToCategory(CategoryId categoryId)
     {
+        Events.Apply(new ProductMovedToCategory(Id, categoryId));
     }
 
     // --------------------------------------------------- APPLY EVENTS ---------------------------------------------------

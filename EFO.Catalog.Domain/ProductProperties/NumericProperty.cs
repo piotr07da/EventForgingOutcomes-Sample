@@ -17,6 +17,8 @@ public class NumericProperty : IEventForged
     {
         var property = new NumericProperty();
 
+        property.Events.Apply(new NumericPropertyDefined(id, name, unit));
+
         return property;
     }
 

@@ -1,5 +1,6 @@
 using EFO.Catalog.Application;
 using EFO.Sales.Application;
+using EFO.SharedReadModel;
 using EFO.WebApi.ServiceCollectionExtensions;
 
 namespace EFO.WebApi;
@@ -19,6 +20,7 @@ public class Program
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
+        services.AddSharedReadModel();
         services.AddCatalogApplicationLayer();
         services.AddSalesApplicationLayer();
 
@@ -30,6 +32,8 @@ public class Program
         services.AddLogging();
         services.AddLocalization();
 
+        services.AddHostedService<SampleDataInitializingHostedService>();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -40,7 +44,6 @@ public class Program
         }
 
         app.UseAuthorization();
-
 
         app.MapControllers();
 

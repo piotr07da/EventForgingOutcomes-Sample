@@ -44,6 +44,6 @@ public sealed class SalesEventHandlers :
             _logger.LogError(ex, ex.Message);
         }
 
-        await _eventDispatcher.DispatchAsync("IntegrationEventsPublished", e, ei, cancellationToken);
+        await _eventDispatcher.DispatchAsync("IntegrationEventsPublisher", e, ei, cancellationToken);
     }
 }

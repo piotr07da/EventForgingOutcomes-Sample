@@ -1,6 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\EFO.Catalog.Domain\EFO.Catalog.Domain.csproj" />
-    <ProjectReference Include="..\EFO.Sales.Domain\EFO.Sales.Domain.csproj" />
-  </ItemGroup>
-</Project>

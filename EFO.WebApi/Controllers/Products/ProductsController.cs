@@ -1,6 +1,6 @@
 using EFO.Sales.Application.Commands.Products;
-using EFO.Sales.Application.Queries.Products;
-using EFO.Sales.Application.ReadModel.Products;
+using EFO.SharedReadModel.Queries;
+using EFO.SharedReadModel.ReadModel.Products;
 using MassTransit.Mediator;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,22 +43,6 @@ public class ProductsController : ControllerBase
         var command = new PriceProduct(productId, body.QuantityThreshold, body.UnitPrice);
 
         await _mediator.Send(command, cancellationToken);
-
-        return NoContent();
-    }
-
-    [HttpPost("samples")]
-    public async Task<NoContentResult> CreateSamples(CancellationToken cancellationToken = default)
-    {
-        for (var pIx = 0; pIx < 100; ++pIx)
-        {
-            var productId = Guid.NewGuid();
-            await _mediator.Send(new IntroduceProduct(productId, $"Product {productId.ToString()[..6]}"), cancellationToken);
-            for (var priceIx = 0; priceIx < 3; ++priceIx)
-            {
-                await _mediator.Send(new PriceProduct(productId, (priceIx + 1) * 10, 100 - priceIx * 10), cancellationToken);
-            }
-        }
 
         return NoContent();
     }

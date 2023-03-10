@@ -13,8 +13,15 @@ public class Program
         // Add services to the container.
         services.AddRazorPages();
         services.AddServerSideBlazor();
-        services.AddSingleton<WeatherForecastService>();
+        services.AddSingleton<IProductCategoriesService, ProductCategoriesService>();
+        services.AddSingleton<IProductService, ProductService>();
         services.AddSingleton<IOrderService, OrderService>();
+
+        services.AddHttpClient("EFO", (sp, client) =>
+        {
+            var c = sp.GetRequiredService<IConfiguration>();
+            client.BaseAddress = new Uri(c["Services:EFO"] ?? throw new Exception("Undefined configuration for EFO Service."));
+        });
 
         var app = builder.Build();
 
@@ -23,7 +30,6 @@ public class Program
         {
             app.UseExceptionHandler("/Error");
         }
-
 
         app.UseStaticFiles();
 

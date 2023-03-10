@@ -1,13 +1,16 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using EFO.WebUi.Data
+@inject IProductCategoriesService ProductCategoriesService
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">EFO.WebUi</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+        <button title="Navigation menu" class="navbar-toggler">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
 </div>
 
-<div class="container-fluid nav-scrollable" @onclick="ToggleNavMenu">
+<div class="container-fluid nav-scrollable">
     <div class="row">
         <nav>
             <div class="position-sticky pt-3">
@@ -28,26 +31,23 @@
                         </NavLink>
                     </li>
                     <li class="nav-item">
-                        <NavLink class="nav-link" href="products">
-                            <span class="oi oi-browser" aria-hidden="true"></span> Products
-                        </NavLink>
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <NavLink class="nav-link" href="products/passive">
-                                    Passive xx
-                                </NavLink>
-                            </li>
-                            <li class="nav-item">
-                                <NavLink class="nav-link" href="products-semiconductors">
-                                    Semiconductors
-                                </NavLink>
-                            </li>
-                            <li class="nav-item">
-                                <NavLink class="nav-link" href="products?category=motors">
-                                    Motors
-                                </NavLink>
-                            </li>
-                        </ul>
+                        <div class="nav-link">
+                            <a>Products</a>
+                            @if (_categories != null)
+                            {
+                                <ul class="nav flex-column">
+                                    @foreach (var category in _categories)
+                                    {
+                                        var href = $"products?category={category.Name}";
+                                        <li class="nav-item">
+                                            <NavLink class="nav-link" href="@href">
+                                                @category.Name
+                                            </NavLink>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -57,13 +57,16 @@
 </div>
 
 @code {
-    private bool collapseNavMenu = true;
+    private ProductCategoryDto[]? _categories;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
+    protected override async Task OnInitializedAsync()
     {
-        collapseNavMenu = !collapseNavMenu;
+        await LoadCategoriesAsync();
+    }
+
+    private async Task LoadCategoriesAsync()
+    {
+        _categories = await ProductCategoriesService.GetCategoriesAsync(null);
     }
 
 }

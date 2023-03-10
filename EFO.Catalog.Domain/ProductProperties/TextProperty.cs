@@ -17,6 +17,8 @@ public class TextProperty : IEventForged
     {
         var property = new TextProperty();
 
+        property.Events.Apply(new TextPropertyDefined(id, name));
+
         return property;
     }
 

@@ -1,8 +1,8 @@
-﻿using EFO.Application.EventHandling;
-using EFO.Catalog.Application.EventHandling;
+﻿using EFO.Catalog.Application.EventHandling;
 using EFO.Catalog.Domain.Categories;
 using EFO.Sales.Application.EventHandling;
 using EFO.Sales.Domain.Orders;
+using EFO.SharedReadModel.EventHandling;
 using EventForging;
 using EventForging.InMemory;
 using EventForging.Serialization;
@@ -18,7 +18,7 @@ internal static class EventForgingServiceCollectionExtensions
             r.ConfigureEventForging(c =>
             {
                 c.Serialization.SetEventTypeNameMappers(
-                    new DefaultEventTypeNameMapper(typeof(CategoryCreated).Assembly), // Catalog
+                    new DefaultEventTypeNameMapper(typeof(CategoryAdded).Assembly), // Catalog
                     new DefaultEventTypeNameMapper(typeof(OrderStarted).Assembly) // Sales
                 );
             });
@@ -26,6 +26,7 @@ internal static class EventForgingServiceCollectionExtensions
             {
                 c.SerializationEnabled = true;
                 c.AddEventSubscription("MainPipeline");
+                c.SetStreamNameFactory((at, aid) => $"{at.FullName}-{aid}"); // A full name is used because there is an aggregate named Product in both - Catalog and Sales projects.
             });
 
             r.AddEventHandlers(typeof(CatalogEventHandlers).Assembly);
