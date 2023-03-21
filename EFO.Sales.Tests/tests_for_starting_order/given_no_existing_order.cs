@@ -1,7 +1,9 @@
 ﻿// ReSharper disable InconsistentNaming
 
 using EFO.Sales.Application.Commands.Orders;
+using EFO.Sales.Domain.Customers;
 using EFO.Sales.Domain.Orders;
+using EventForging;
 using EventOutcomes;
 using Xunit;
 
@@ -19,7 +21,8 @@ public sealed class given_no_existing_order
         _customerId = Guid.NewGuid();
         _test = Test
             .For(_orderId)
-            .Given(); // no events means not existing order
+            .Given() // no events means not existing order
+            .Given(_customerId, new CustomerRegistered(_customerId));
     }
 
     [Fact]
@@ -30,6 +33,18 @@ public sealed class given_no_existing_order
             .ThenInOrder(
                 new OrderStarted(_orderId),
                 new OrderCustomerAssigned(_orderId, _customerId));
+
+        await _test.TestAsync();
+    }
+
+    [Fact]
+    public async Task when_StartOrder_for_not_existing_customer_then_exception_thrown()
+    {
+        var notExistingCustomerId = Guid.NewGuid();
+
+        _test
+            .When(new StartOrder(_orderId, notExistingCustomerId))
+            .ThenException<AggregateNotFoundEventForgingException>();
 
         await _test.TestAsync();
     }

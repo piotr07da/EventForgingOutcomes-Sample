@@ -27,8 +27,8 @@ public class given_order_with_item_and_product
         _productUnitPrice = 25m;
         var alreadyAddedItemId = Guid.NewGuid();
         _test = Test
-            .ForMany()
-            .Given(_orderId,
+            .For(_orderId)
+            .Given(
                 new OrderStarted(_orderId),
                 new OrderItemAdded(_orderId, alreadyAddedItemId, Guid.NewGuid()),
                 new OrderItemPriced(_orderId, alreadyAddedItemId, _alreadyAddedItemPrice))
@@ -46,8 +46,8 @@ public class given_order_with_item_and_product
 
         _test
             .When(new AddOrderItem(_orderId, _orderItemId, _productId, quantity))
-            .ThenAny(_orderId)
-            .Then(_orderId, new OrderPriced(_orderId, expectedOrderPrice))
+            .ThenAny()
+            .Then(new OrderPriced(_orderId, expectedOrderPrice))
             .ThenAny(_orderId);
 
         await _test.TestAsync();

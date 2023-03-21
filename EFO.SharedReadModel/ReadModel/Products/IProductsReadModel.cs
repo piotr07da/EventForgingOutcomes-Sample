@@ -2,7 +2,7 @@
 
 public interface IProductsReadModel
 {
-    ProductsDto GetProducts();
+    ProductsDto GetProducts(Guid categoryId, IDictionary<Guid, (decimal MinValue, decimal MaxValue)> numericPropertiesFilters, IDictionary<Guid, string[]> textPropertiesFilters);
 
     void TryAddProduct(Guid productId);
 

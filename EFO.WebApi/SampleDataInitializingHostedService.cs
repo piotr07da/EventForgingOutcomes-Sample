@@ -49,11 +49,13 @@ internal sealed class SampleDataInitializingHostedService : IHostedService
             var npPowerId = await DefineNumericPropertyAsync("Power", "W");
             var npResistanceId = await DefineNumericPropertyAsync("Resistance", "Ohm");
             var npMaxOperVoltId = await DefineNumericPropertyAsync("Max. operating voltage", "V");
-            var npMountingTypeId = await DefineTextPropertyAsync("Mounting");
+            var npManufacturerId = await DefineTextPropertyAsync("Manufacturer");
+            var npMountingId = await DefineTextPropertyAsync("Mounting");
 
             var pTran10n65lgeId = await IntroduceProductAsync("10N65-LGE", cSemiconductorsTransistorsUnipolarNChannelId);
             await PublishAsync(new SetProductNumericProperty(pTran10n65lgeId, npDrainSourceVoltageId, 650));
-            await PublishAsync(new SetProductTextProperty(pTran10n65lgeId, npMountingTypeId, "THT"));
+            await PublishAsync(new SetProductTextProperty(pTran10n65lgeId, npManufacturerId, "LUGUANG ELECTRONIC"));
+            await PublishAsync(new SetProductTextProperty(pTran10n65lgeId, npMountingId, "THT"));
             await PublishAsync(new PriceProduct(pTran10n65lgeId, 1, 3.54848m));
             await PublishAsync(new PriceProduct(pTran10n65lgeId, 5, 2.32869m));
             await PublishAsync(new PriceProduct(pTran10n65lgeId, 25, 2.09804m));
@@ -62,7 +64,8 @@ internal sealed class SampleDataInitializingHostedService : IHostedService
 
             var pTran2sj168Id = await IntroduceProductAsync("2SJ168", cSemiconductorsTransistorsUnipolarPChannelId);
             await PublishAsync(new SetProductNumericProperty(pTran2sj168Id, npDrainSourceVoltageId, -60));
-            await PublishAsync(new SetProductTextProperty(pTran2sj168Id, npMountingTypeId, "SMD"));
+            await PublishAsync(new SetProductTextProperty(pTran2sj168Id, npManufacturerId, "TOSHIBA"));
+            await PublishAsync(new SetProductTextProperty(pTran2sj168Id, npMountingId, "SMD"));
             await PublishAsync(new PriceProduct(pTran2sj168Id, 1, 3.28m));
             await PublishAsync(new PriceProduct(pTran2sj168Id, 5, 2.39m));
             await PublishAsync(new PriceProduct(pTran2sj168Id, 25, 2.11m));
@@ -73,7 +76,8 @@ internal sealed class SampleDataInitializingHostedService : IHostedService
             await PublishAsync(new SetProductNumericProperty(pResistor12w100rId, npPowerId, .5m));
             await PublishAsync(new SetProductNumericProperty(pResistor12w100rId, npResistanceId, 100));
             await PublishAsync(new SetProductNumericProperty(pResistor12w100rId, npMaxOperVoltId, 350));
-            await PublishAsync(new SetProductTextProperty(pResistor12w100rId, npMountingTypeId, "THT"));
+            await PublishAsync(new SetProductTextProperty(pResistor12w100rId, npManufacturerId, "ROYAL OHM"));
+            await PublishAsync(new SetProductTextProperty(pResistor12w100rId, npMountingId, "THT"));
             await PublishAsync(new PriceProduct(pResistor12w100rId, 100, 0.17971m));
             await PublishAsync(new PriceProduct(pResistor12w100rId, 500, 0.12491m));
             await PublishAsync(new PriceProduct(pResistor12w100rId, 1000, 0.09350m));
@@ -81,7 +85,8 @@ internal sealed class SampleDataInitializingHostedService : IHostedService
             await PublishAsync(new SetProductNumericProperty(pResistor12w10kId, npPowerId, .5m));
             await PublishAsync(new SetProductNumericProperty(pResistor12w10kId, npResistanceId, 10000));
             await PublishAsync(new SetProductNumericProperty(pResistor12w10kId, npMaxOperVoltId, 350));
-            await PublishAsync(new SetProductTextProperty(pResistor12w10kId, npMountingTypeId, "THT"));
+            await PublishAsync(new SetProductTextProperty(pResistor12w10kId, npManufacturerId, "ROYAL OHM"));
+            await PublishAsync(new SetProductTextProperty(pResistor12w10kId, npMountingId, "THT"));
             await PublishAsync(new PriceProduct(pResistor12w10kId, 100, 0.17971m));
             await PublishAsync(new PriceProduct(pResistor12w10kId, 500, 0.12491m));
             await PublishAsync(new PriceProduct(pResistor12w10kId, 1000, 0.09350m));
@@ -89,13 +94,15 @@ internal sealed class SampleDataInitializingHostedService : IHostedService
             await PublishAsync(new SetProductNumericProperty(pResistor5w10rId, npPowerId, 5m));
             await PublishAsync(new SetProductNumericProperty(pResistor5w10rId, npResistanceId, 10));
             await PublishAsync(new SetProductNumericProperty(pResistor5w10rId, npMaxOperVoltId, 350));
-            await PublishAsync(new SetProductTextProperty(pResistor5w10rId, npMountingTypeId, "THT"));
+            await PublishAsync(new SetProductTextProperty(pResistor5w10rId, npManufacturerId, "ROYAL OHM"));
+            await PublishAsync(new SetProductTextProperty(pResistor5w10rId, npMountingId, "THT"));
             await PublishAsync(new PriceProduct(pResistor5w10rId, 5000, 0.70809m));
             var pResistor5w47rId = await IntroduceProductAsync("5W-47R", cPassivesResistorsId);
             await PublishAsync(new SetProductNumericProperty(pResistor5w47rId, npPowerId, 5m));
             await PublishAsync(new SetProductNumericProperty(pResistor5w47rId, npResistanceId, 47));
             await PublishAsync(new SetProductNumericProperty(pResistor5w47rId, npMaxOperVoltId, 350));
-            await PublishAsync(new SetProductTextProperty(pResistor5w47rId, npMountingTypeId, "THT"));
+            await PublishAsync(new SetProductTextProperty(pResistor5w47rId, npManufacturerId, "ROYAL OHM"));
+            await PublishAsync(new SetProductTextProperty(pResistor5w47rId, npMountingId, "THT"));
             await PublishAsync(new PriceProduct(pResistor5w47rId, 2, 2.08910m));
             await PublishAsync(new PriceProduct(pResistor5w47rId, 10, 1.34582m));
             await PublishAsync(new PriceProduct(pResistor5w47rId, 50, 0.85763m));
@@ -142,7 +149,7 @@ internal sealed class SampleDataInitializingHostedService : IHostedService
         return id;
     }
 
-    private async Task PublishAsync(object command) => await _mediator.Send(command);
+    private async Task PublishAsync(object command) => await _mediator.Publish(command);
 
     private static Guid NewId() => Guid.NewGuid();
 }

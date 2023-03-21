@@ -22,8 +22,8 @@ public class given_order_and_product
         _orderItemId = Guid.NewGuid();
         _productId = Guid.NewGuid();
         _test = Test
-            .ForMany()
-            .Given(_orderId, new OrderStarted(_orderId))
+            .For(_orderId)
+            .Given(new OrderStarted(_orderId))
             .Given(_productId, new ProductIntroduced(_productId));
     }
 
@@ -35,10 +35,10 @@ public class given_order_and_product
         _test
             .Given(_productId, new ProductPriced(_productId, 1, 100m))
             .When(new AddOrderItem(_orderId, _orderItemId, _productId, quantity))
-            .ThenInOrder(_orderId,
+            .ThenInOrder(
                 new OrderItemAdded(_orderId, _orderItemId, _productId),
                 new OrderItemQuantityChanged(_orderId, _orderItemId, quantity))
-            .ThenAny(_orderId);
+            .ThenAny();
 
         await _test.TestAsync();
     }
@@ -68,9 +68,9 @@ public class given_order_and_product
             .Given(_productId, new ProductPriced(_productId, 15, firstThresholdUnitPrice))
             .Given(_productId, new ProductPriced(_productId, 30, secondThresholdUnitPrice))
             .When(new AddOrderItem(_orderId, _orderItemId, _productId, quantity))
-            .ThenAny(_orderId)
-            .Then(_orderId, new OrderItemPriced(_orderId, _orderItemId, expectedItemPrice))
-            .ThenAny(_orderId);
+            .ThenAny()
+            .Then(new OrderItemPriced(_orderId, _orderItemId, expectedItemPrice))
+            .ThenAny();
 
         await _test.TestAsync();
     }
@@ -87,9 +87,9 @@ public class given_order_and_product
             .Given(_productId, new ProductPriced(_productId, 15, firstThresholdUnitPrice))
             .Given(_productId, new ProductPriced(_productId, 30, secondThresholdUnitPrice))
             .When(new AddOrderItem(_orderId, _orderItemId, _productId, quantity))
-            .ThenAny(_orderId)
-            .Then(_orderId, new OrderItemPriced(_orderId, _orderItemId, expectedItemPrice))
-            .ThenAny(_orderId);
+            .ThenAny()
+            .Then(new OrderItemPriced(_orderId, _orderItemId, expectedItemPrice))
+            .ThenAny();
 
         await _test.TestAsync();
     }
@@ -104,11 +104,11 @@ public class given_order_and_product
         _test
             .Given(_productId, new ProductPriced(_productId, 1, unitPrice))
             .When(new AddOrderItem(_orderId, _orderItemId, _productId, quantity))
-            .ThenAny(_orderId)
-            .ThenInOrder(_orderId,
+            .ThenAny()
+            .ThenInOrder(
                 new OrderItemPriced(_orderId, _orderItemId, expectedItemPrice),
                 new OrderPriced(_orderId, expectedItemPrice))
-            .ThenAny(_productId);
+            .ThenAny();
 
         await _test.TestAsync();
     }

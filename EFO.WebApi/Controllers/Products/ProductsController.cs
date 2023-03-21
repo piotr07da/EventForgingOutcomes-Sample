@@ -17,10 +17,10 @@ public class ProductsController : ControllerBase
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
-    [HttpGet("")]
-    public async Task<ProductsDto> GetProducts(CancellationToken cancellationToken = default)
+    [HttpPost("search")]
+    public async Task<ProductsDto> SearchProducts([FromQuery] Guid categoryId, [FromBody] SearchProductsBody body, CancellationToken cancellationToken = default)
     {
-        var query = new GetProducts();
+        var query = new GetProducts(categoryId, body.NumericPropertiesFilters, body.TextPropertiesFilters);
 
         var client = _mediator.CreateRequestClient<GetProducts>();
         var orderResponse = await client.GetResponse<ProductsDto>(query, cancellationToken);
@@ -34,7 +34,7 @@ public class ProductsController : ControllerBase
 
         await _mediator.Send(command, cancellationToken);
 
-        return Created($"api/products/{command.ProductId}", command.ProductId);
+        return Created($"products/{command.ProductId}", command.ProductId);
     }
 
     [HttpPut("{productId}/prices")]

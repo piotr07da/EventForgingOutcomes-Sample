@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{85A1385D-E80A-491A-AC9C-C9F6BA89E478}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_SolutionItems", "{85A1385D-E80A-491A-AC9C-C9F6BA89E478}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build-n-test.yml = .github\workflows\build-n-test.yml
 		Directory.Build.props = Directory.Build.props
@@ -31,6 +31,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.Shared.Application", "EFO.Shared.Application\EFO.Shared.Application.csproj", "{74091BC7-3DE7-4BB4-8FD8-A8366D00396D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFO.SharedReadModel", "EFO.SharedReadModel\EFO.SharedReadModel.csproj", "{9BEB4055-5988-480D-B98A-A068A8ACE80A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{4104B110-3424-4C7F-8E68-36F9B4436417}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sales", "Sales", "{CE0CAA27-26BE-42BE-9E31-F2DA1B79FFC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{7201306F-FEAE-459C-AFA4-64D409C72341}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +91,17 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D2426A16-8995-42DB-A793-91A5C803451A} = {CE0CAA27-26BE-42BE-9E31-F2DA1B79FFC3}
+		{1A3029EA-5145-4077-94AA-9C4A687EB91E} = {CE0CAA27-26BE-42BE-9E31-F2DA1B79FFC3}
+		{E2D9CE72-CEC6-4114-A79D-F1F235831A09} = {CE0CAA27-26BE-42BE-9E31-F2DA1B79FFC3}
+		{4928ED50-F5C3-4573-BD7D-D15061D74480} = {4104B110-3424-4C7F-8E68-36F9B4436417}
+		{58466788-81C8-492C-AC0F-FB7F1085A281} = {4104B110-3424-4C7F-8E68-36F9B4436417}
+		{2E9076B6-32E7-42B5-AB03-23E454D3E2F4} = {7201306F-FEAE-459C-AFA4-64D409C72341}
+		{F5F23EC8-FBC7-4EEF-B20A-497E7D3723AB} = {4104B110-3424-4C7F-8E68-36F9B4436417}
+		{1E425A24-B1E9-4D2D-9DB7-EF95D2299006} = {7201306F-FEAE-459C-AFA4-64D409C72341}
+		{74091BC7-3DE7-4BB4-8FD8-A8366D00396D} = {7201306F-FEAE-459C-AFA4-64D409C72341}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E4FBD2B-24C5-49B2-8341-F1C6ACD68B80}

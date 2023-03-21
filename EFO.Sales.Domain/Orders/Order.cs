@@ -18,12 +18,12 @@ public class Order : IEventForged
     public OrderId Id { get; private set; }
     public OrderItems Items { get; } = new();
 
-    public static Order Start(OrderId orderId, CustomerId customerId)
+    public static Order Start(OrderId orderId, Customer customer)
     {
         var order = new Order();
         var events = order.Events;
         events.Apply(new OrderStarted(orderId));
-        events.Apply(new OrderCustomerAssigned(orderId, customerId));
+        events.Apply(new OrderCustomerAssigned(orderId, customer.Id));
         return order;
     }
 
