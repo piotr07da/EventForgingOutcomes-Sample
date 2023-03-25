@@ -18,9 +18,9 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost("search")]
-    public async Task<ProductsDto> SearchProducts([FromQuery] Guid categoryId, [FromBody] SearchProductsBody body, CancellationToken cancellationToken = default)
+    public async Task<ProductsDto> SearchProducts([FromBody] SearchProductsBody body, CancellationToken cancellationToken = default)
     {
-        var query = new GetProducts(categoryId, body.NumericPropertiesFilters, body.TextPropertiesFilters);
+        var query = new GetProducts(body.CategoryId, body.NumericPropertiesFilters, body.TextPropertiesFilters);
 
         var client = _mediator.CreateRequestClient<GetProducts>();
         var orderResponse = await client.GetResponse<ProductsDto>(query, cancellationToken);

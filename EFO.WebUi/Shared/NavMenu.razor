@@ -38,9 +38,9 @@
                                 <ul class="nav flex-column">
                                     @foreach (var category in _categories)
                                     {
-                                        var href = $"products?category={category.Name}";
+                                        var address = $"catalog/{category.Id}";
                                         <li class="nav-item">
-                                            <NavLink class="nav-link" href="@href">
+                                            <NavLink class="nav-link" href="@address">
                                                 @category.Name
                                             </NavLink>
                                         </li>
