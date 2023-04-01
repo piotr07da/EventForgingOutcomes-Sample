@@ -8,6 +8,8 @@ namespace EFO.Sales.Application.EventHandling;
 public sealed class SalesEventHandlers :
     IEventHandler<OrderStarted>,
     IEventHandler<OrderCustomerAssigned>,
+    IEventHandler<OrderItemAdded>,
+    IEventHandler<OrderItemQuantityChanged>,
     IEventHandler<ProductIntroduced>,
     IEventHandler<ProductNamed>,
     IEventHandler<ProductPriced>
@@ -26,6 +28,10 @@ public sealed class SalesEventHandlers :
     public async Task HandleAsync(OrderStarted e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 
     public async Task HandleAsync(OrderCustomerAssigned e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+
+    public async Task HandleAsync(OrderItemAdded e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
+
+    public async Task HandleAsync(OrderItemQuantityChanged e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 
     public async Task HandleAsync(ProductIntroduced e, EventInfo ei, CancellationToken cancellationToken) => await DispatchAsync(e, ei, cancellationToken);
 

@@ -22,7 +22,17 @@ public class ProductCategoriesController : ControllerBase
         var query = new GetCategories(parentCategoryId);
 
         var client = _mediator.CreateRequestClient<GetCategories>();
-        var orderResponse = await client.GetResponse<ProductCategoriesDto>(query, cancellationToken);
-        return orderResponse.Message;
+        var response = await client.GetResponse<ProductCategoriesDto>(query, cancellationToken);
+        return response.Message;
+    }
+
+    [HttpGet("{categoryId}")]
+    public async Task<ProductCategoryDto> GetCategory([FromRoute] Guid categoryId, CancellationToken cancellationToken = default)
+    {
+        var query = new GetCategory(categoryId);
+
+        var client = _mediator.CreateRequestClient<GetCategory>();
+        var response = await client.GetResponse<ProductCategoryDto>(query, cancellationToken);
+        return response.Message;
     }
 }

@@ -18,3 +18,5 @@ public class GetCategoriesHandler : IConsumer<GetCategories>
         await context.RespondAsync(new ProductCategoriesDto(categories));
     }
 }
+
+

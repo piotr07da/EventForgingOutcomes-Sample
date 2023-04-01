@@ -9,4 +9,5 @@ public sealed class OrderDto
 
     public Guid OrderId { get; set; }
     public Guid CustomerId { get; set; }
+    public IList<OrderItemDto> Items { get; set; } = new List<OrderItemDto>();
 }

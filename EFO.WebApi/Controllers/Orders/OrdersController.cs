@@ -17,6 +17,16 @@ public class OrdersController : ControllerBase
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
+    [HttpGet()]
+    public async Task<OrderDto[]> GetOrders(CancellationToken cancellationToken = default)
+    {
+        var query = new GetOrders();
+
+        var client = _mediator.CreateRequestClient<GetOrders>();
+        var orderResponse = await client.GetResponse<OrderDto[]>(query, cancellationToken);
+        return orderResponse.Message;
+    }
+
     [HttpGet("{orderId}")]
     public async Task<OrderDto> GetOrder([FromRoute] Guid orderId, CancellationToken cancellationToken = default)
     {

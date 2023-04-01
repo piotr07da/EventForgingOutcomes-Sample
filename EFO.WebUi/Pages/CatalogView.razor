@@ -1,0 +1,40 @@
+﻿@page "/catalog/{categoryId:guid}"
+@inherits ReactiveComponentBase<CatalogViewModel>
+@using EFO.WebUi.Data
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ICatalogViewModelFactory _viewModelFactory
+
+<PageTitle>Catalog</PageTitle>
+
+<h1>@ViewModel!.CategoryName</h1>
+
+<h2>Select Category</h2>
+
+@if (ViewModel!.ProductListViewModel == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <ProductListView ProductListViewModel="ViewModel!.ProductListViewModel"></ProductListView>
+}
+
+@code
+{
+    [Parameter]
+    public Guid CategoryId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ViewModel = _viewModelFactory.Create();
+        await Task.CompletedTask;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        ViewModel!.CategoryId = CategoryId;
+        await Task.CompletedTask;
+    }
+}

@@ -1,8 +1,9 @@
-﻿using static EFO.WebUi.Data.ProductService;
+﻿using Refit;
 
 namespace EFO.WebUi.Data;
 
 public interface IProductService
 {
-    Task<ProductDto[]> GetProductsAsync(Guid categoryId, IDictionary<Guid, NumericPropertyFilter> numericPropertiesFilters, IDictionary<Guid, TextPropertyFilter> textPropertiesFilters);
+    [Post("/products/search")]
+    Task<ProductsDto> SearchProductsAsync(SearchProductsDto search);
 }

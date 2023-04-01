@@ -1,4 +1,8 @@
 ﻿@page "/"
+@using EFO.WebUi.Data;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@inject ProtectedLocalStorage LocalStorage
+@inject IOrderService OrderService
 
 <PageTitle>Index</PageTitle>
 
@@ -10,5 +14,9 @@ Welcome to your new app.
 
 @code
 {
-
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var orderId = Guid.Parse("22222222-1111-1111-1111-111111111111");
+        await LocalStorage.SetAsync("orderId", orderId);
+    }
 }

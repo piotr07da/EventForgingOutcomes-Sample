@@ -1,0 +1,33 @@
+﻿@inherits ReactiveComponentBase<ProductListViewModel>
+@using EFO.WebUi.Components.ProductList;
+@using EFO.WebUi.Data;
+@using EFO.WebUi.Pages;
+@namespace EFO.WebUi.Components
+
+<div class="container-fluid">
+    <div class="row bg-dark text-light">
+        <div class="col col-6 border-end py-2">Product</div>
+        <div class="col col-2 border-end py-2">Price per Quantity</div>
+        <div class="col col-2 border-end py-2">Quantity</div>
+        <div class="col col-2 py-2"></div>
+    </div>
+
+    @if (ViewModel != null)
+    {
+        foreach (var productRowViewModel in ViewModel.Products)
+        {
+            <ProductRowView ProductRowViewModel="productRowViewModel"></ProductRowView>
+        }
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public ProductListViewModel? ProductListViewModel { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        ViewModel = ProductListViewModel;
+    }
+}

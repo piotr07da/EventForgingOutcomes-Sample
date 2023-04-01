@@ -1,4 +1,7 @@
+using EFO.WebUi.Components.ProductList;
 using EFO.WebUi.Data;
+using EFO.WebUi.Pages;
+using Refit;
 
 namespace EFO.WebUi;
 
@@ -13,15 +16,15 @@ public class Program
         // Add services to the container.
         services.AddRazorPages();
         services.AddServerSideBlazor();
-        services.AddSingleton<IProductCategoriesService, ProductCategoriesService>();
-        services.AddSingleton<IProductService, ProductService>();
-        services.AddSingleton<IOrderService, OrderService>();
 
-        services.AddHttpClient("EFO", (sp, client) =>
-        {
-            var c = sp.GetRequiredService<IConfiguration>();
-            client.BaseAddress = new Uri(c["Services:EFO"] ?? throw new Exception("Undefined configuration for EFO Service."));
-        });
+        services.AddTransient<CatalogViewModel>();
+        services.AddScoped<ICatalogViewModelFactory, CatalogViewModelFactory>();
+        services.AddScoped<IProductListViewModelFactory, ProductListViewModelFactory>();
+        services.AddScoped<IProductRowViewModelFactory, ProductRowViewModelFactory>();
+
+        AddAndConfigureEfoHttpClient<IProductCategoryService>(services);
+        AddAndConfigureEfoHttpClient<IProductService>(services);
+        AddAndConfigureEfoHttpClient<IOrderService>(services);
 
         var app = builder.Build();
 
@@ -39,5 +42,17 @@ public class Program
         app.MapFallbackToPage("/_Host");
 
         app.Run();
+    }
+
+    private static void AddAndConfigureEfoHttpClient<T>(IServiceCollection services)
+        where T: class
+    {
+        services
+            .AddRefitClient<T>()
+            .ConfigureHttpClient((sp, client) =>
+            {
+                var c = sp.GetRequiredService<IConfiguration>();
+                client.BaseAddress = new Uri(c["Services:EFO"] ?? throw new Exception("Undefined configuration for EFO Service."));
+            });
     }
 }

@@ -3,6 +3,8 @@
 using EFO.Catalog.Application.Commands.Categories;
 using EFO.Catalog.Application.Commands.ProductProperties;
 using EFO.Catalog.Application.Commands.Products;
+using EFO.Sales.Application.Commands.Customers;
+using EFO.Sales.Application.Commands.Orders;
 using EFO.Sales.Application.Commands.Products;
 using MassTransit.Mediator;
 using IntroduceProductInCatalog = EFO.Catalog.Application.Commands.Products.IntroduceProduct;
@@ -36,6 +38,11 @@ internal sealed class SampleDataInitializingHostedService : IHostedService
     {
         Task.Run(async () =>
         {
+            var customerId = Guid.Parse("11111111-1111-1111-1111-111111111111");
+            var orderId = Guid.Parse("22222222-1111-1111-1111-111111111111");
+            await PublishAsync(new RegisterCustomer(customerId));
+            await PublishAsync(new StartOrder(orderId, customerId));
+
             var cSemiconductorsId = await AddCategoryAsync("Semiconductors");
             var cSemiconductorsTransistorsId = await AddSubcategoryAsync(cSemiconductorsId, "Transistors");
             var cSemiconductorsTransistorsUnipolarId = await AddSubcategoryAsync(cSemiconductorsTransistorsId, "Unipolar transistors");

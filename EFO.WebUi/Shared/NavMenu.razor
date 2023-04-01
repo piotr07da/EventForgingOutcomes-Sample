@@ -1,5 +1,5 @@
 ﻿@using EFO.WebUi.Data
-@inject IProductCategoriesService ProductCategoriesService
+@inject IProductCategoryService ProductCategoriesService
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -66,7 +66,8 @@
 
     private async Task LoadCategoriesAsync()
     {
-        _categories = await ProductCategoriesService.GetCategoriesAsync(null);
+        var categories = await ProductCategoriesService.GetCategoriesAsync(null);
+        _categories = categories.Categories;
     }
 
 }
