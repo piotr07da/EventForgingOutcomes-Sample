@@ -2,6 +2,9 @@ using EFO.Catalog.Application;
 using EFO.Sales.Application;
 using EFO.SharedReadModel;
 using EFO.WebApi.ServiceCollectionExtensions;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
+using System.Globalization;
 
 namespace EFO.WebApi;
 
@@ -34,7 +37,10 @@ public class Program
         services.AddAndConfigureMassTransit();
 
         services.AddLogging();
-        services.AddLocalization( o => o.ResourcesPath = "Resource");
+        
+        services.AddLocalization();
+        services.AddSingleton<IStringLocalizer>(sp => sp.GetRequiredService<IStringLocalizer<Catalog.Domain.Localization.CatalogLocalizationResource>>());
+        services.AddSingleton<IStringLocalizer>(sp => sp.GetRequiredService<IStringLocalizer<Sales.Domain.Localization.SalesLocalizationResource>>());
 
         services.AddHostedService<SampleDataInitializingHostedService>();
 

@@ -28,14 +28,7 @@ public class ProductRowViewModel : ReactiveObject
 
     private async Task AddOrderItemAsync(IOrderService orderService, ProtectedLocalStorage localStorage)
     {
-        try
-        {
-            var orderId = await localStorage.GetAsync<Guid>("orderId");
-            await orderService.AddOrderItemAsync(orderId.Value, new AddOrderItemDto(Product.ProductId, Quantity));
-        }
-        catch(Exception ex)
-        {
-            Console.WriteLine(ex);
-        }
+        var orderId = await localStorage.GetAsync<Guid>("orderId");
+        await orderService.AddOrderItemAsync(orderId.Value, new AddOrderItemDto(Product.ProductId, Quantity));
     }
 }
