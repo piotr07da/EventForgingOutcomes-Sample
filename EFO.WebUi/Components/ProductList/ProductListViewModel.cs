@@ -9,7 +9,7 @@ public class ProductListViewModel : ReactiveObject
 
     public ProductListViewModel(ProductDto[] products, IProductRowViewModelFactory productRowViewModelFactory)
     {
-        Products = products.Select(p => productRowViewModelFactory.Create(p)).ToArray();
+        Products = products.Select(productRowViewModelFactory.Create).ToArray();
     }
 
     public IEnumerable<ProductRowViewModel> Products

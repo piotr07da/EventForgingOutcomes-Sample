@@ -2,7 +2,7 @@
 @inherits ReactiveComponentBase<CatalogViewModel>
 @using EFO.WebUi.Data
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
-@inject ICatalogViewModelFactory _viewModelFactory
+@inject CatalogViewModel _viewModel
 
 <PageTitle>Catalog</PageTitle>
 
@@ -28,7 +28,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        ViewModel = _viewModelFactory.Create();
+        ViewModel = _viewModel;
         await Task.CompletedTask;
     }
 

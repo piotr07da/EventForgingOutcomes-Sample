@@ -9,8 +9,9 @@ namespace EFO.WebUi.Pages;
 public class CatalogViewModel : ReactiveObject
 {
     private readonly IProductListViewModelFactory _productListViewModelFactory;
-    private readonly IProductService _productService;
     private readonly IProductCategoryService _productCategoryService;
+    private readonly IProductService _productService;
+
     private Guid _categoryId;
     private string? _categoryName;
     private ProductListViewModel? _productListViewModel;

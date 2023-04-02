@@ -2,6 +2,7 @@ using EFO.WebUi.Components.ProductList;
 using EFO.WebUi.Data;
 using EFO.WebUi.Pages;
 using Refit;
+using System.Xml.Linq;
 
 namespace EFO.WebUi;
 
@@ -18,7 +19,6 @@ public class Program
         services.AddServerSideBlazor();
 
         services.AddTransient<CatalogViewModel>();
-        services.AddScoped<ICatalogViewModelFactory, CatalogViewModelFactory>();
         services.AddScoped<IProductListViewModelFactory, ProductListViewModelFactory>();
         services.AddScoped<IProductRowViewModelFactory, ProductRowViewModelFactory>();
 
@@ -56,3 +56,7 @@ public class Program
             });
     }
 }
+
+
+
+

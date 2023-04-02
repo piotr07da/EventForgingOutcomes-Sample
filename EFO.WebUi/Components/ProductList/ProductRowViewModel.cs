@@ -13,10 +13,7 @@ public class ProductRowViewModel : ReactiveObject
     {
         Product = product;
 
-        AddToOrderCommand = ReactiveCommand.CreateFromTask(async () => {
-            var orderId = await localStorage.GetAsync<Guid>("orderId");
-            await orderService.AddOrderItemAsync(orderId.Value, new AddOrderItemDto(product.ProductId, Quantity));
-        });
+        AddToOrderCommand = ReactiveCommand.CreateFromTask(async () => await AddOrderItemAsync(orderService, localStorage));
     }
 
     public ProductDto Product { get; }
@@ -28,4 +25,17 @@ public class ProductRowViewModel : ReactiveObject
     }
 
     public ReactiveCommand<Unit, Unit> AddToOrderCommand { get; }
+
+    private async Task AddOrderItemAsync(IOrderService orderService, ProtectedLocalStorage localStorage)
+    {
+        try
+        {
+            var orderId = await localStorage.GetAsync<Guid>("orderId");
+            await orderService.AddOrderItemAsync(orderId.Value, new AddOrderItemDto(Product.ProductId, Quantity));
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
 }

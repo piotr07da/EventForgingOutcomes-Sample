@@ -34,7 +34,7 @@ public class Program
         services.AddAndConfigureMassTransit();
 
         services.AddLogging();
-        services.AddLocalization();
+        services.AddLocalization( o => o.ResourcesPath = "Resource");
 
         services.AddHostedService<SampleDataInitializingHostedService>();
 
