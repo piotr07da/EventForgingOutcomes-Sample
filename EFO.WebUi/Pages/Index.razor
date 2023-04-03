@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 @inject ProtectedLocalStorage LocalStorage
 @inject IOrderService OrderService
+@inject IToastService toastService
 
 <PageTitle>Index</PageTitle>
 
@@ -11,6 +12,8 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?"/>
+
+<button class="btn btn-danger" @onclick="@(() => toastService.ShowError("I'm an ERROR message"))">Error Toast</button>
 
 @code
 {

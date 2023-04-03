@@ -1,3 +1,4 @@
+using Blazored.Toast;
 using EFO.WebUi.Components.ProductList;
 using EFO.WebUi.Data;
 using EFO.WebUi.Pages;
@@ -25,6 +26,10 @@ public class Program
         AddAndConfigureEfoHttpClient<IProductService>(services);
         AddAndConfigureEfoHttpClient<IOrderService>(services);
 
+        services.AddBlazoredToast();
+
+        services.AddSingleton<IStateHasChangedSource, StateHasChangedSource>();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -44,7 +49,7 @@ public class Program
     }
 
     private static void AddAndConfigureEfoHttpClient<T>(IServiceCollection services)
-        where T: class
+        where T : class
     {
         services.AddTransient<ErrorHandlingHttpMessageHandler>();
 
