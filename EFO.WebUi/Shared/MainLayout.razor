@@ -1,21 +1,14 @@
 ﻿@using Blazored.Toast.Configuration
 @inherits LayoutComponentBase
+@inject IToastService ToastService
+@inject IErrorsSource ErrorsSource
 
 <BlazoredToasts Position="ToastPosition.BottomRight"
-                Timeout="10"
-                IconType="IconType.Material"
-                ErrorIcon="error_outline"
-                InfoIcon="school"
-                SuccessIcon="done_outline"
-                WarningIcon="warning"
+                Timeout="8"
                 ShowProgressBar="@true"
                 ShowCloseButton="@true"
                 MaxToastCount="3">
-    <CloseButtonContent>
-        <div>
-            <span class="myCloseButtonStyleClass">&times;</span>
-        </div>
-    </CloseButtonContent>
+    
 </BlazoredToasts>
 
 <PageTitle>EFO.WebUi</PageTitle>
@@ -31,3 +24,14 @@
         </article>
     </main>
 </div>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        ErrorsSource.Errors.Subscribe(error =>
+        {
+            ToastService.ShowError(error);
+        });
+    }
+}

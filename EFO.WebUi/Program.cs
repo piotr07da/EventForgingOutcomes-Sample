@@ -18,17 +18,16 @@ public class Program
         services.AddRazorPages();
         services.AddServerSideBlazor();
 
-        services.AddTransient<CatalogViewModel>();
+        services.AddScoped<CatalogViewModel>();
         services.AddScoped<IProductListViewModelFactory, ProductListViewModelFactory>();
         services.AddScoped<IProductRowViewModelFactory, ProductRowViewModelFactory>();
 
         AddAndConfigureEfoHttpClient<IProductCategoryService>(services);
         AddAndConfigureEfoHttpClient<IProductService>(services);
         AddAndConfigureEfoHttpClient<IOrderService>(services);
+        services.AddSingleton<IErrorsSource, ErrorsSource>();
 
         services.AddBlazoredToast();
-
-        services.AddSingleton<IStateHasChangedSource, StateHasChangedSource>();
 
         var app = builder.Build();
 

@@ -1,18 +1,12 @@
 ﻿@page "/catalog/{categoryId:guid}"
 @inherits ReactiveComponentBase<CatalogViewModel>
-@using EFO.WebUi.Data
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
-@inject CatalogViewModel _viewModel
-@inject IToastService toastService
-@inject IStateHasChangedSource StateHasChangedSource
+@inject CatalogViewModel CatalogViewModel
 
 <PageTitle>Catalog</PageTitle>
 
 <h1>@ViewModel!.CategoryName</h1>
 
 <h2>Select Category</h2>
-
-<button class="btn btn-danger" @onclick="@(() => toastService.ShowError("I'm an ERROR message"))">Error Toast</button>
 
 @if (ViewModel!.ProductListViewModel == null)
 {
@@ -32,13 +26,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        ViewModel = _viewModel;
-
-        StateHasChangedSource.ChangeCall.Subscribe(o =>
-        {
-            toastService.ShowError("I'm an ERROR message");
-        });
-
+        ViewModel = CatalogViewModel;
         await Task.CompletedTask;
     }
 
