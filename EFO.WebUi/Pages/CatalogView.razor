@@ -2,11 +2,7 @@
 @inherits ReactiveComponentBase<CatalogViewModel>
 @inject CatalogViewModel CatalogViewModel
 
-<PageTitle>Catalog</PageTitle>
-
-<h1>@ViewModel!.CategoryName</h1>
-
-<h2>Select Category</h2>
+<PageTitle>Catalog - @ViewModel?.CategoryName</PageTitle>
 
 @if (ViewModel!.ProductListViewModel == null)
 {
@@ -16,6 +12,30 @@
 }
 else
 {
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            @foreach (var parentCategory in ViewModel.ParentCategories.Reverse().Select(cvm => cvm.Category))
+            {
+                <li class="breadcrumb-item"><a href="/catalog/@parentCategory.Id">@parentCategory.Name</a></li>
+            }
+            <li class="breadcrumb-item active" aria-current="page">@ViewModel.CategoryName</li>
+        </ol>
+    </nav>
+
+    <h1>@ViewModel!.CategoryName</h1>
+
+    <h2>Subcategories:</h2>
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var subcategoryViewModel in ViewModel.Subcategories)
+            {
+                <div class="col col-2">
+                    <ProductCategoryItemView ProductCategoryItemViewModel="subcategoryViewModel"></ProductCategoryItemView>
+                </div>
+            }
+        </div>
+    </div>
+
     <ProductListView ProductListViewModel="ViewModel!.ProductListViewModel"></ProductListView>
 }
 

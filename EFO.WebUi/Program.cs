@@ -19,6 +19,7 @@ public class Program
         services.AddServerSideBlazor();
 
         services.AddScoped<CatalogViewModel>();
+        services.AddScoped<CartViewModel>();
         services.AddScoped<IProductListViewModelFactory, ProductListViewModelFactory>();
         services.AddScoped<IProductRowViewModelFactory, ProductRowViewModelFactory>();
 

@@ -57,6 +57,7 @@ public sealed class ProductsReadModelBuildingEventHandlers :
     {
         var cat = _categoriesReadModel.GetCategory(e.CategoryId);
         cat.ParentId = e.ParentCategoryId;
+        cat.Parent = _categoriesReadModel.GetCategory(e.ParentCategoryId);
         return Task.CompletedTask;
     }
 
@@ -95,14 +96,26 @@ public sealed class ProductsReadModelBuildingEventHandlers :
     {
         var product = _productsReadModel.GetProduct(e.ProductId);
         var category = _categoriesReadModel.GetCategory(e.CategoryId);
-        var categories = new List<ProductCategoryDto> { category, };
+        var newCategoriesBranch = new List<ProductCategoryDto> { category, };
         while (category.ParentId != null)
         {
             category = _categoriesReadModel.GetCategory(category.ParentId.Value);
-            categories.Add(category);
+            newCategoriesBranch.Add(category);
         }
 
-        product.Categories = categories.ToArray();
+        var oldCategoriesBranch = product.Categories;
+        product.Categories = newCategoriesBranch.ToArray();
+
+        foreach (var c in oldCategoriesBranch)
+        {
+            --c.NumberOfProducts;
+        }
+
+        foreach (var c in newCategoriesBranch)
+        {
+            ++c.NumberOfProducts;
+        }
+
         return Task.CompletedTask;
     }
 

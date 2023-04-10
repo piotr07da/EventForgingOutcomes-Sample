@@ -1,19 +1,10 @@
 ﻿@page "/"
-@using EFO.WebUi.Data;
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 @inject ProtectedLocalStorage LocalStorage
-@inject IOrderService OrderService
-@inject IToastService toastService
 
-<PageTitle>Index</PageTitle>
+<PageTitle>EFO</PageTitle>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?"/>
-
-<button class="btn btn-danger" @onclick="@(() => toastService.ShowError("I'm an ERROR message"))">Error Toast</button>
+Welcome to EventForging and EventOutcomes example project.
 
 @code
 {

@@ -48,9 +48,18 @@ internal sealed class SampleDataInitializingHostedService : IHostedService
             var cSemiconductorsTransistorsUnipolarId = await AddSubcategoryAsync(cSemiconductorsTransistorsId, "Unipolar transistors");
             var cSemiconductorsTransistorsUnipolarNChannelId = await AddSubcategoryAsync(cSemiconductorsTransistorsUnipolarId, "N channel transistors");
             var cSemiconductorsTransistorsUnipolarPChannelId = await AddSubcategoryAsync(cSemiconductorsTransistorsUnipolarId, "P channel transistors");
+            var cSemiconductorsDiodesId = await AddSubcategoryAsync(cSemiconductorsId, "Diodes");
+            var cBridgeRectifiersId = await AddSubcategoryAsync(cSemiconductorsId, "Bridge rectifiers");
+            var cIntegratedCircuitsId = await AddSubcategoryAsync(cSemiconductorsId, "Integrated circuits");
+            var cDiacsId = await AddSubcategoryAsync(cSemiconductorsId, "Diacs");
+            var cTriacsId = await AddSubcategoryAsync(cSemiconductorsId, "Triacs");
 
             var cPassivesId = await AddCategoryAsync("Passives");
             var cPassivesResistorsId = await AddSubcategoryAsync(cPassivesId, "Resistors");
+            var cPassivesCapacitorsId = await AddSubcategoryAsync(cPassivesId, "Capacitors");
+            var cPassivesInductorsId = await AddSubcategoryAsync(cPassivesId, "Inductors");
+            var cPotentiometersId = await AddSubcategoryAsync(cPassivesId, "Potentiometers");
+            var cEncodersId = await AddSubcategoryAsync(cPassivesId, "Encoders");
 
             var npDrainSourceVoltageId = await DefineNumericPropertyAsync("Drain-source voltage", "V");
             var npPowerId = await DefineNumericPropertyAsync("Power", "W");

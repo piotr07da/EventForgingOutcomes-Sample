@@ -28,5 +28,5 @@ public class ErrorHandlingHttpMessageHandler : DelegatingHandler
         return response;
     }
 
-    private sealed record ErrorContent(string Message);
+    private sealed record ErrorContent(string Message, string Exception);
 }

@@ -1,0 +1,23 @@
+﻿@inherits ReactiveComponentBase<ProductCategoryItemViewModel>
+
+<div class="card">
+    @if (ViewModel != null)
+    {
+        <div class="card-body">
+            <h5 class="card-title">
+                <a href="/catalog/@ViewModel.Category.Id" class="card-link">@ViewModel.Category.Name</a>
+            </h5>
+            <p>(@ViewModel.Category.NumberOfProducts)</p>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public ProductCategoryItemViewModel? ProductCategoryItemViewModel { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        ViewModel = ProductCategoryItemViewModel;
+    }
+}

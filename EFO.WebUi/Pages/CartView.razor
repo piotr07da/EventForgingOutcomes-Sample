@@ -1,0 +1,28 @@
+﻿@page "/cart/"
+@inherits ReactiveComponentBase<CartViewModel>
+@inject CartViewModel CartViewModel
+
+<PageTitle>Cart</PageTitle>
+
+<h1>Cart</h1>
+
+@if (ViewModel is not null && ViewModel.Order is not null)
+{
+    <h2>ORDER - TODO</h2>
+    <h3>Number of items: @ViewModel.Order.Items.Length</h3>
+    <ul>
+        @foreach (var item in ViewModel.Order.Items)
+        {
+            <li>@item.OrderItemId - @item.ProductId - qty: @item.Quantity</li>
+        }
+    </ul>
+}
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        ViewModel = CartViewModel;
+        await ViewModel.LoadOrderAsync();
+    }
+}
