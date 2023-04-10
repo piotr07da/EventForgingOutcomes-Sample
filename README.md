@@ -16,16 +16,19 @@ This project is MIT licensed.
 This project is yet another online store. This time it is a store of electronic components.
 The example presented here has implementation of just two bounded contexts - Catalog and Sales.
 
-Catalog context allows introduction of new products. Each product can be characterized by a set of properties.
+**Catalog** context allows introduction of new products. Each product can be characterized by a set of properties.
 Properties are divided into two different types - text and numeric.
 Text property allows to add some textual information like type of transistor or type of capacitor.
 Numeric properties are used to describe such properties like gate current, max voltage, max temeparture.
 Products can also be categorized in hierarchical categories.
 
-Sales context i responsible for introducing and pricing new products.
+**Sales** context i responsible for introducing and pricing new products.
 Products can have single unit price but can also have few different prices defined for different quantities- the higher quantity the lower the price.
 Sales context is also responsible for collecting orders. Orders have order items. Each item is priced.
 Discount can be added on the order level automatically or by use of promotion code.
+
+Below is the diagram of aggregates, commands and events.
+![aggregates, commands, events](doc/img/commands-and-events.png)
 
 ## EventForging
 The aggregates can be found in the **EFO.Sales.Domain** and **EFO.Catalog.Domain** projects.
