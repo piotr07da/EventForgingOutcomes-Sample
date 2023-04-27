@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
-		<PackageReference Include="EventForging" Version="1.0.15-alpha" />
+		<PackageReference Include="EventForging" Version="1.0.18" />
 		<PackageReference Include="EventOutcomes" Version="1.0.14-alpha" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />

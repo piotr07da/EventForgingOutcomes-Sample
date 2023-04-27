@@ -44,6 +44,19 @@ public class Program
 
         services.AddHostedService<SampleDataInitializingHostedService>();
 
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowedCorsOrigins",
+                corsPolicyBuilder =>
+                {
+                    corsPolicyBuilder
+                        .SetIsOriginAllowed(_ => true)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+        });
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -56,6 +69,8 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
+
+        app.UseCors("AllowedCorsOrigins");
 
         app.Run();
     }
